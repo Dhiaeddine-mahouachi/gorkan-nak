@@ -1,45 +1,258 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#050708">
-<meta name="description" content="Dhia Mahouachi — Computer Engineering, cybersecurity and digital products. Founder of AuraDigital.">
-<title>Dhia Mahouachi — Cybersecurity × Digital Products</title>
-<style>
-:root{--bg:#050708;--ink:#f5fbff;--muted:#91a0aa;--cyan:#76eaff;--lime:#d7ff55;--line:rgba(255,255,255,.13);--mx:68%;--my:35%}
-*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}button{font:inherit}::selection{background:var(--lime);color:#050708}
-.stage{position:fixed;inset:0;z-index:0;overflow:hidden;background:radial-gradient(circle at 73% 28%,rgba(25,130,155,.25),transparent 24%),radial-gradient(circle at 64% 68%,rgba(140,165,45,.11),transparent 29%),linear-gradient(135deg,#071015,#030506 64%)}
-.fallback-motion{position:absolute;inset:-20%;opacity:.75;filter:blur(42px);background:conic-gradient(from 125deg at 66% 43%,transparent 0 27%,rgba(118,234,255,.17) 36%,transparent 48% 62%,rgba(215,255,85,.10) 72%,transparent 85%);animation:drift 14s ease-in-out infinite alternate;transform:scale(1.08)}@keyframes drift{to{transform:translate3d(-4%,4%,0) scale(1.2) rotate(8deg)}}
-.stage video{position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;object-position:center;filter:saturate(.78) contrast(1.1) brightness(.66);transform:scale(1.04);will-change:transform}.has-video .fallback-motion{opacity:.12}.no-video .stage video{display:none}
-.stage:before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(2,5,7,.9),rgba(2,5,7,.57) 33%,rgba(2,5,7,.15) 62%,rgba(2,5,7,.54)),linear-gradient(180deg,rgba(2,5,7,.2),rgba(2,5,7,.04) 42%,rgba(2,5,7,.82))}.stage:after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.32;background-image:linear-gradient(rgba(118,234,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(118,234,255,.055) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(circle at var(--mx) var(--my),#000 0 22%,transparent 66%);-webkit-mask-image:radial-gradient(circle at var(--mx) var(--my),#000 0 22%,transparent 66%)}
-.vignette{position:absolute;inset:0;z-index:4;box-shadow:inset 0 0 170px 45px rgba(0,0,0,.46);pointer-events:none}.scan{position:absolute;z-index:4;left:0;right:0;top:24%;height:1px;opacity:.23;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 22px var(--cyan);animation:scan 8s linear infinite;pointer-events:none}@keyframes scan{50%{top:76%}}
-.hud{position:fixed;z-index:30;top:0;left:0;right:0;padding:max(14px,env(safe-area-inset-top)) clamp(15px,3vw,42px) 0;pointer-events:none}.hudrow{display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:auto}.brand{display:flex;gap:10px;align-items:center;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:850}.signal{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 17px var(--lime)}.actions{display:flex;align-items:center;gap:8px}.pill{border:1px solid var(--line);background:rgba(5,8,10,.5);backdrop-filter:blur(15px);border-radius:999px;padding:10px 13px;font-size:10px;font-weight:800}.lang{display:flex;padding:3px;border:1px solid var(--line);background:rgba(5,8,10,.5);backdrop-filter:blur(15px);border-radius:999px}.lang button{border:0;background:transparent;color:#8b979f;font-size:9px;font-weight:900;padding:7px 8px;border-radius:999px;cursor:pointer}.lang button.active{background:#f5fbff;color:#050708}.track{margin-top:12px;height:1px;background:rgba(255,255,255,.11);overflow:hidden}.track i{display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--cyan),var(--lime));transform:scaleX(0);transform-origin:left;will-change:transform}
-.story{position:relative;z-index:10}.scene{min-height:112svh;position:relative;display:flex;align-items:center;padding:110px clamp(18px,6vw,92px) 82px;perspective:1200px}.inner{width:min(1280px,100%);margin:auto;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.72fr);gap:clamp(34px,7vw,110px);align-items:center}.scene:nth-child(even) .inner{grid-template-columns:minmax(300px,.72fr) minmax(0,1.05fr)}.scene:nth-child(even) .copy{order:2}.scene:nth-child(even) .visual{order:1}.copy{position:relative;z-index:5;max-width:790px}.kicker{display:flex;align-items:center;gap:11px;margin:0 0 18px;color:var(--cyan);font-size:11px;text-transform:uppercase;letter-spacing:.18em;font-weight:900}.kicker:before{content:"";width:34px;height:1px;background:currentColor;box-shadow:0 0 12px currentColor}h1,h2{margin:0;letter-spacing:-.065em}h1{font-size:clamp(58px,8.2vw,132px);line-height:.79;font-weight:900}h1 .outline{color:transparent;-webkit-text-stroke:1px rgba(245,251,255,.65)}h2{font-size:clamp(46px,6.6vw,98px);line-height:.9;font-weight:880}.lead{margin:26px 0 0;max-width:680px;color:#b1bcc4;font-size:clamp(15px,1.4vw,19px);line-height:1.65}.lead strong{color:#fff}.micro{margin-top:20px;color:#76858f;font-size:10px;letter-spacing:.13em;text-transform:uppercase}.ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 17px;border:1px solid var(--line);border-radius:15px;background:rgba(7,12,15,.52);color:#edf4f7;font-size:11px;font-weight:850;backdrop-filter:blur(14px);cursor:pointer;transition:.22s}.cta:hover{transform:translateY(-3px);border-color:rgba(118,234,255,.4)}.cta.primary{background:var(--lime);color:#071005;border-color:var(--lime)}
-.visual{position:relative;height:min(620px,66vw);min-height:480px;transform-style:preserve-3d;will-change:transform}.orb{position:absolute;inset:14%;border-radius:50%;border:1px solid rgba(118,234,255,.27);transform:rotateX(68deg) rotateZ(var(--rot,0deg));box-shadow:0 0 75px rgba(118,234,255,.08),inset 0 0 54px rgba(118,234,255,.04)}.orb:before,.orb:after{content:"";position:absolute;inset:14%;border:inherit;border-radius:inherit}.orb:after{inset:29%;border-color:rgba(215,255,85,.31)}.node{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 20px var(--lime)}.n1{top:11%;left:51%}.n2{right:12%;top:53%;background:var(--cyan);box-shadow:0 0 20px var(--cyan)}.n3{bottom:17%;left:22%}
-.glass{--rx:0deg;--ry:0deg;--ty:0px;--tz:0px;position:absolute;border:1px solid rgba(255,255,255,.15);border-radius:26px;background:linear-gradient(145deg,rgba(12,20,24,.7),rgba(9,13,16,.43));backdrop-filter:blur(22px);box-shadow:0 24px 70px rgba(0,0,0,.34);transform:translate3d(0,var(--ty),var(--tz)) rotateX(var(--rx)) rotateY(var(--ry));will-change:transform}.id{width:min(92%,430px);right:0;top:14%;padding:22px}.idtop{display:flex;justify-content:space-between;gap:20px}.mark{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:var(--lime);color:#071005;font-weight:950;letter-spacing:-.08em}.chip{font-size:9px;border:1px solid var(--line);padding:7px 9px;border-radius:999px;color:#b9c4ca}.id h3{font-size:29px;line-height:.95;letter-spacing:-.05em;margin:66px 0 9px}.id p{font-size:11px;color:#9eabb4;margin:0;line-height:1.5}.idfoot{display:flex;justify-content:space-between;gap:10px;margin-top:34px;padding-top:15px;border-top:1px solid var(--line);font-size:9px;color:#8d9aa3;text-transform:uppercase;letter-spacing:.11em}.mini{width:205px;left:1%;bottom:13%;padding:16px}.mini b{display:block;color:var(--cyan);font-size:28px;letter-spacing:-.06em}.mini span{font-size:9px;color:#94a1aa;text-transform:uppercase;letter-spacing:.12em}
-.stack{position:absolute;inset:9% 0;display:grid;align-content:center;gap:13px;transform-style:preserve-3d}.product{padding:18px 18px 17px 20px;border-radius:24px;border:1px solid var(--line);background:rgba(8,13,16,.62);backdrop-filter:blur(18px);display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:14px;box-shadow:0 18px 60px rgba(0,0,0,.25)}.product:nth-child(1){transform:translateX(14%) rotateY(-9deg) translateZ(70px)}.product:nth-child(2){transform:translateX(-3%) rotateY(7deg) translateZ(35px)}.product:nth-child(3){transform:translateX(9%) rotateY(-5deg) translateZ(5px)}.picon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:rgba(118,234,255,.12);color:var(--cyan);font-weight:950}.product h3{margin:0 0 5px;font-size:16px}.product p{margin:0;color:#929fa8;font-size:10px;line-height:1.4}.product em{font-style:normal;color:#bdc8ce;font-size:18px}
-.matrix{position:absolute;inset:2% 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-content:center;transform-style:preserve-3d}.skill{aspect-ratio:1/.8;padding:15px;border-radius:21px;border:1px solid var(--line);background:rgba(8,13,16,.59);backdrop-filter:blur(18px);display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 18px 44px rgba(0,0,0,.19)}.skill:nth-child(odd){transform:rotateY(-8deg) translateZ(35px)}.skill:nth-child(even){transform:rotateY(7deg) translateZ(15px)}.skill i{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 13px var(--cyan)}.skill b{font-size:13px}.skill small{color:#83919a;font-size:9px;text-transform:uppercase;letter-spacing:.1em}
-.contact{max-width:840px;margin:auto;padding:clamp(30px,5vw,60px);border-radius:34px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(145deg,rgba(8,13,16,.8),rgba(8,13,16,.46));backdrop-filter:blur(24px);box-shadow:0 30px 90px rgba(0,0,0,.38);text-align:center}.contact .kicker{justify-content:center}.contact h2{font-size:clamp(48px,8vw,110px)}.contact .lead{margin:22px auto 0}.contact .ctas{justify-content:center}.reveal{opacity:.26;transform:translateY(50px) scale(.976);transition:opacity .55s,transform .65s cubic-bezier(.2,.8,.2,1)}.scene.active .reveal{opacity:1;transform:none}.footer{position:relative;z-index:12;margin-top:-70px;padding:0 clamp(18px,6vw,92px) calc(30px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;gap:12px;color:#65737c;font-size:9px;text-transform:uppercase;letter-spacing:.1em}
-@media(max-width:900px){.stage video{object-position:56% center;filter:saturate(.75) contrast(1.08) brightness(.58)}.stage:before{background:linear-gradient(180deg,rgba(2,5,7,.26),rgba(2,5,7,.12) 35%,rgba(2,5,7,.73) 66%,rgba(2,5,7,.95))}.scene{min-height:auto;padding:110px 18px 90px}.inner,.scene:nth-child(even) .inner{grid-template-columns:1fr;gap:26px}.scene:nth-child(even) .copy,.scene:nth-child(even) .visual{order:initial}.copy{padding-top:47svh}.scene:not(:first-child) .copy{padding-top:36svh}.visual{height:420px;min-height:0}.pill{display:none}.matrix{grid-template-columns:repeat(2,1fr)}.footer{margin-top:0}}
-@media(max-width:520px){h1{font-size:clamp(54px,18vw,82px)}h2{font-size:clamp(42px,13vw,62px)}.lead{font-size:14px}.visual{height:380px}.id{width:94%;padding:18px}.id h3{margin-top:54px;font-size:25px}.mini{width:170px}.product{grid-template-columns:38px 1fr auto;padding:14px}.picon{width:38px;height:38px}.brand span{display:none}.contact{padding:34px 19px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.scan,.fallback-motion{animation:none}.reveal,.cta{transition:none}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#06090b">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Dhia Mahouachi — Computer Engineering, cybersecurity, digital products and founder of AuraDigital in Istanbul.">
+  <meta name="author" content="Dhia Mahouachi">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dhia Mahouachi — Build. Secure. Transform.">
+  <meta property="og:description" content="Computer Engineering × Cybersecurity × Digital Products.">
+  <meta property="og:url" content="https://dhiamahouachi.website/">
+  <meta property="og:image" content="https://dhiamahouachi.website/assets/media/robot-scroll-poster.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://dhiamahouachi.website/">
+  <link rel="preload" href="assets/media/robot-scroll-poster.jpg" as="image" fetchpriority="high">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%2306090b'/%3E%3Cpath d='M17 46V18h12c12 0 19 5 19 14s-7 14-19 14H17Zm10-8h3c5 0 8-2 8-6s-3-6-8-6h-3v12Z' fill='%23c8ff5c'/%3E%3C/svg%3E">
+  <title>Dhia Mahouachi — Build. Secure. Transform.</title>
+  <link rel="stylesheet" href="styles.css">
+  <noscript><style>.loader{display:none!important}body{overflow:auto!important}</style></noscript>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dhia Mahouachi",
+      "url": "https://dhiamahouachi.website/",
+      "homeLocation": {"@type": "Place", "name": "Istanbul, Türkiye"},
+      "knowsAbout": ["Computer Engineering", "Cybersecurity", "Web Development", "Cloud Infrastructure"],
+      "sameAs": [
+        "https://github.com/Dhiaeddine-mahouachi",
+        "https://auradigital.ink"
+      ]
+    }
+  </script>
+  <script src="app.js" defer></script>
 </head>
-<body>
-<div class="stage" aria-hidden="true"><div class="fallback-motion"></div><video id="scrollVideo" muted playsinline preload="auto"><source src="assets/scroll-bg.mp4" type="video/mp4"></video><div class="scan"></div><div class="vignette"></div></div>
-<header class="hud"><div class="hudrow"><a class="brand" href="#top"><i class="signal"></i><span>Dhia Mahouachi</span></a><div class="actions"><a class="pill" href="https://auradigital.ink" target="_blank" rel="noopener">AuraDigital ↗</a><div class="lang" aria-label="Language"><button class="active" data-lang="en">EN</button><button data-lang="tr">TR</button><button data-lang="ar">AR</button></div></div></div><div class="track"><i id="progress"></i></div></header>
-<main class="story" id="top">
-<section class="scene"><div class="inner"><div class="copy reveal"><p class="kicker" data-i18n="k1">Engineering × Security × Building</p><h1>Dhia<br><span class="outline">Mahouachi</span></h1><p class="lead" data-i18n="intro">Computer Engineering student, cybersecurity learner and founder of <strong>AuraDigital</strong>. I build practical digital products and secure web experiences from Istanbul.</p><div class="ctas"><a class="cta primary" href="https://auradigital.ink" target="_blank" rel="noopener"><span data-i18n="work">See my work</span> ↗</a><a class="cta" href="#security"><span data-i18n="security">Cybersecurity</span> ↓</a></div><p class="micro" data-i18n="micro">Scroll controls the scene · cinematic motion + 3D layers</p></div><div class="visual reveal" data-visual><div class="orb" id="orb"><i class="node n1"></i><i class="node n2"></i><i class="node n3"></i></div><article class="glass id" data-float><div class="idtop"><div class="mark">DM</div><div class="chip">IST · 2026</div></div><h3>Dhia<br>Mahouachi</h3><p>Computer Engineering · Cybersecurity · Digital products</p><div class="idfoot"><span>Founder · AuraDigital</span><span>01 / 04</span></div></article><article class="glass mini" data-float><b>Build.</b><span>Ship · test · improve</span></article></div></div></section>
-<section class="scene"><div class="inner"><div class="copy reveal"><p class="kicker" data-i18n="k2">What I am building</p><h2 data-i18n="build">Digital ideas,<br>made real.</h2><p class="lead" data-i18n="buildlead">I use web technology, cloud infrastructure and AI-assisted workflows to turn concepts into products people can actually use.</p><p class="micro">Design → code → deploy → learn</p></div><div class="visual reveal"><div class="stack"><a class="product" href="https://auradigital.ink" target="_blank" rel="noopener"><div class="picon">A</div><div><h3>AuraDigital</h3><p>Websites, NFC, automation and digital growth.</p></div><em>↗</em></a><a class="product" href="https://auramenu.space" target="_blank" rel="noopener"><div class="picon">M</div><div><h3>AuraMenu</h3><p>Modern QR menus for restaurants and cafés.</p></div><em>↗</em></a><a class="product" href="https://auradigital.ink/quicksite" target="_blank" rel="noopener"><div class="picon">Q</div><div><h3>QuickSite</h3><p>Template-first websites with a fast request flow.</p></div><em>↗</em></a></div></div></div></section>
-<section class="scene" id="security"><div class="inner"><div class="copy reveal"><p class="kicker" data-i18n="k3">Cybersecurity direction</p><h2 data-i18n="sectitle">Learn the attack.<br>Understand the defense.</h2><p class="lead" data-i18n="seclead">My focus is growing toward SOC, security engineering and penetration testing through hands-on labs, network analysis and web security practice.</p><p class="micro">Linux · Networks · Web · Detection · Cloud</p></div><div class="visual reveal"><div class="matrix"><div class="skill"><i></i><b>Linux</b><small>Systems</small></div><div class="skill"><i></i><b>Wireshark</b><small>Traffic</small></div><div class="skill"><i></i><b>Burp Suite</b><small>Web security</small></div><div class="skill"><i></i><b>Nmap</b><small>Recon</small></div><div class="skill"><i></i><b>Python</b><small>Automation</small></div><div class="skill"><i></i><b>Cloudflare</b><small>Web infra</small></div></div></div></div></section>
-<section class="scene"><div class="inner" style="display:block"><div class="contact reveal"><p class="kicker" data-i18n="k4">Next chapter</p><h2 data-i18n="next">Build.<br>Secure. Grow.</h2><p class="lead" data-i18n="nextlead">I am open to cybersecurity internships and junior opportunities while continuing to build real products and sharpen my technical skills.</p><div class="ctas"><a class="cta primary" href="https://auradigital.ink" target="_blank" rel="noopener"><span data-i18n="visit">Visit AuraDigital</span> ↗</a><button class="cta" id="copy"><span data-i18n="copy">Copy this page</span> ⧉</button></div></div></div></section>
-</main><footer class="footer"><span>© 2026 Dhia Mahouachi</span><span data-i18n="foot">Istanbul · Computer Engineering · Cybersecurity</span></footer>
-<script>
-const T={en:{k1:'Engineering × Security × Building',intro:'Computer Engineering student, cybersecurity learner and founder of <strong>AuraDigital</strong>. I build practical digital products and secure web experiences from Istanbul.',work:'See my work',security:'Cybersecurity',micro:'Scroll controls the scene · cinematic motion + 3D layers',k2:'What I am building',build:'Digital ideas,<br>made real.',buildlead:'I use web technology, cloud infrastructure and AI-assisted workflows to turn concepts into products people can actually use.',k3:'Cybersecurity direction',sectitle:'Learn the attack.<br>Understand the defense.',seclead:'My focus is growing toward SOC, security engineering and penetration testing through hands-on labs, network analysis and web security practice.',k4:'Next chapter',next:'Build.<br>Secure. Grow.',nextlead:'I am open to cybersecurity internships and junior opportunities while continuing to build real products and sharpen my technical skills.',visit:'Visit AuraDigital',copy:'Copy this page',foot:'Istanbul · Computer Engineering · Cybersecurity'},tr:{k1:'Mühendislik × Güvenlik × Üretim',intro:'Bilgisayar Mühendisliği öğrencisi, siber güvenlik alanında gelişen ve <strong>AuraDigital</strong> kurucusuyum. İstanbul’dan kullanışlı dijital ürünler ve güvenli web deneyimleri geliştiriyorum.',work:'Projelerimi gör',security:'Siber güvenlik',micro:'Kaydırma sahneyi kontrol eder · sinematik hareket + 3D katmanlar',k2:'Neler geliştiriyorum',build:'Dijital fikirleri<br>gerçeğe dönüştürüyorum.',buildlead:'Web teknolojileri, bulut altyapısı ve yapay zekâ destekli iş akışlarıyla fikirleri gerçek ürünlere dönüştürüyorum.',k3:'Siber güvenlik hedefim',sectitle:'Saldırıyı öğren.<br>Savunmayı anla.',seclead:'SOC, güvenlik mühendisliği ve penetrasyon testi yönünde uygulamalı lablar, ağ analizi ve web güvenliğiyle ilerliyorum.',k4:'Sıradaki bölüm',next:'Üret.<br>Güvenli kıl. Büyüt.',nextlead:'Siber güvenlik stajı ve junior fırsatlarına açığım; aynı zamanda gerçek ürünler geliştirip teknik becerilerimi güçlendiriyorum.',visit:'AuraDigital’i ziyaret et',copy:'Sayfayı kopyala',foot:'İstanbul · Bilgisayar Mühendisliği · Siber Güvenlik'},ar:{k1:'هندسة × أمن × بناء',intro:'طالب هندسة حاسوب، أطور نفسي في الأمن السيبراني ومؤسس <strong>AuraDigital</strong>. أبني منتجات رقمية وتجارب ويب آمنة من إسطنبول.',work:'شاهد أعمالي',security:'الأمن السيبراني',micro:'التمرير يتحكم بالمشهد · حركة سينمائية + طبقات ثلاثية الأبعاد',k2:'ما الذي أبنيه',build:'أفكار رقمية،<br>تتحول إلى واقع.',buildlead:'أستخدم تقنيات الويب والبنية السحابية والذكاء الاصطناعي لتحويل الأفكار إلى منتجات قابلة للاستخدام.',k3:'اتجاهي في الأمن السيبراني',sectitle:'تعلّم الهجوم.<br>وافهم الدفاع.',seclead:'أركز على SOC وهندسة الأمن واختبار الاختراق عبر المختبرات العملية وتحليل الشبكات وأمن الويب.',k4:'الفصل القادم',next:'ابنِ.<br>أمّن. تطوّر.',nextlead:'أنا منفتح على فرص التدريب والوظائف المبتدئة في الأمن السيبراني مع الاستمرار في تطوير مهاراتي وبناء منتجات حقيقية.',visit:'زيارة AuraDigital',copy:'نسخ هذه الصفحة',foot:'إسطنبول · هندسة حاسوب · أمن سيبراني'}};
-function lang(l){let t=T[l]||T.en;document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(e=>{let v=t[e.dataset.i18n];if(v)e.innerHTML=v});document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));localStorage.setItem('dm-lang',l)}document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>lang(b.dataset.lang));lang(localStorage.getItem('dm-lang')||'en');
-const v=document.getElementById('scrollVideo'),bar=document.getElementById('progress'),scenes=[...document.querySelectorAll('.scene')],reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;let duration=10,raf=0,target=0,unlocked=false;
-function unlock(){if(unlocked||reduced)return;unlocked=true;let p=v.play();if(p&&p.then)p.then(()=>{v.pause();v.currentTime=Math.min(target,duration-.05)}).catch(()=>{})}['touchstart','pointerdown','wheel'].forEach(x=>addEventListener(x,unlock,{once:true,passive:true}));v.addEventListener('loadedmetadata',()=>{duration=Number.isFinite(v.duration)?v.duration:10;v.pause();document.body.classList.add('has-video');update()},{once:true});v.addEventListener('error',()=>document.body.classList.add('no-video'),{once:true});
-function update(){raf=0;let max=Math.max(1,document.documentElement.scrollHeight-innerHeight),p=Math.min(1,Math.max(0,scrollY/max));bar.style.transform=`scaleX(${p})`;target=Math.min(duration-.04,Math.max(.01,p*duration));if(!reduced&&v.readyState>=1&&Math.abs(v.currentTime-target)>.03)try{v.currentTime=target}catch{}document.documentElement.style.setProperty('--mx',`${30+p*48}%`);document.documentElement.style.setProperty('--my',`${24+p*50}%`);document.getElementById('orb').style.setProperty('--rot',`${p*240}deg`);scenes.forEach((s,i)=>{let r=s.getBoundingClientRect(),d=(r.top+r.height/2-innerHeight/2)/innerHeight;s.classList.toggle('active',Math.abs(d)<.73);let vis=s.querySelector('[data-visual]')||s.querySelector('.visual');if(vis&&!reduced)vis.style.transform=`translate3d(0,${d*20}px,0) rotateX(${d*-2.3}deg) rotateY(${d*(i%2?4:-4)}deg)`;s.querySelectorAll('[data-float]').forEach((c,j)=>{if(reduced)return;let m=j?1.35:1;c.style.setProperty('--ty',`${d*42*m}px`);c.style.setProperty('--rx',`${d*-7*m}deg`);c.style.setProperty('--ry',`${d*(i%2?-10:10)*m}deg`);c.style.setProperty('--tz',`${(1-Math.min(1,Math.abs(d)))*34*m}px`)})})}function req(){if(!raf)raf=requestAnimationFrame(update)}addEventListener('scroll',req,{passive:true});addEventListener('resize',req,{passive:true});addEventListener('pointermove',e=>{document.documentElement.style.setProperty('--mx',`${e.clientX/innerWidth*100}%`);document.documentElement.style.setProperty('--my',`${e.clientY/innerHeight*100}%`)},{passive:true});update();
-document.getElementById('copy').onclick=async e=>{try{await navigator.clipboard.writeText(location.href);e.currentTarget.querySelector('span').textContent='Copied ✓';setTimeout(()=>lang(localStorage.getItem('dm-lang')||'en'),1200)}catch{location.hash='top'}};
-</script></body></html>
+<body class="is-loading">
+  <div class="loader" id="loader" role="status" aria-live="polite">
+    <div class="loader__mark">DM</div>
+    <div class="loader__copy">
+      <span>INITIALIZING DIGITAL IDENTITY</span>
+      <i><b id="loaderProgress"></b></i>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#top" aria-label="Dhia Mahouachi — home">
+      <span class="brand__pulse"></span>
+      <span>DHIA / 2026</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#work" data-i18n="navWork">Work</a>
+      <a href="#security" data-i18n="navSecurity">Security</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+    </nav>
+
+    <div class="language-switcher" role="group" aria-label="Language">
+      <button type="button" class="is-active" data-language="en" aria-pressed="true">EN</button>
+      <button type="button" data-language="tr" aria-pressed="false">TR</button>
+      <button type="button" data-language="ar" aria-pressed="false">AR</button>
+    </div>
+  </header>
+
+  <div class="document-progress" aria-hidden="true"><i id="documentProgress"></i></div>
+
+  <main>
+    <section class="hero-sequence" id="top" aria-label="Scroll-controlled transformation">
+      <div class="hero-sticky">
+        <div class="hero-media" aria-hidden="true">
+          <video
+            id="transformVideo"
+            class="hero-video"
+            muted
+            playsinline
+            preload="auto"
+            poster="assets/media/robot-scroll-poster.jpg"
+            tabindex="-1"
+          >
+            <source src="assets/media/robot-scroll.mp4" type="video/mp4">
+          </video>
+          <div class="hero-fallback"></div>
+          <div class="hero-shade"></div>
+          <div class="hero-grid"></div>
+          <div class="hero-noise"></div>
+          <div class="scanner-line"></div>
+        </div>
+
+        <div class="hero-coordinates" aria-hidden="true">
+          <span>41.0082° N</span>
+          <span>28.9784° E</span>
+        </div>
+
+        <article class="chapter chapter--intro" data-chapter data-start="-0.05" data-end="0.28" data-index="0">
+          <p class="eyebrow"><span>01</span><b data-i18n="heroKicker">Computer Engineering × Cybersecurity</b></p>
+          <h1><span>Dhia</span><span class="outlined">Mahouachi.</span></h1>
+          <p class="hero-lead" data-i18n="heroLead">I build digital products, study how systems break, and design how they should recover.</p>
+          <div class="hero-actions">
+            <a class="button button--primary" href="#work"><span data-i18n="exploreWork">Explore my work</span><i>↓</i></a>
+            <a class="button button--glass" href="https://auradigital.ink" target="_blank" rel="noopener"><span>AuraDigital</span><i>↗</i></a>
+          </div>
+        </article>
+
+        <article class="chapter chapter--right" data-chapter data-start="0.18" data-end="0.52" data-index="1">
+          <p class="eyebrow"><span>02</span><b data-i18n="transformKicker">Transformation</b></p>
+          <h2 data-i18n-html="transformTitle">Human ideas.<br><span>Machine precision.</span></h2>
+          <p data-i18n="transformLead">Technology matters when it turns curiosity into something useful, fast and dependable.</p>
+        </article>
+
+        <article class="chapter chapter--left" data-chapter data-start="0.45" data-end="0.78" data-index="2">
+          <p class="eyebrow"><span>03</span><b data-i18n="securityKicker">Security mindset</b></p>
+          <h2 data-i18n-html="securityHeroTitle">Think like an attacker.<br><span>Build like a defender.</span></h2>
+          <p data-i18n="securityHeroLead">Linux, networks, web security and detection—learned through hands-on labs and real products.</p>
+        </article>
+
+        <article class="chapter chapter--final" data-chapter data-start="0.71" data-end="1.05" data-index="3">
+          <p class="eyebrow"><span>04</span><b data-i18n="founderKicker">Founder mode</b></p>
+          <h2 data-i18n-html="founderTitle">Build.<br><span>Secure.</span> Grow.</h2>
+          <p data-i18n="founderLead">From Istanbul, I am building AuraDigital while moving toward cybersecurity engineering.</p>
+          <a class="text-link" href="#work"><span data-i18n="enterPortfolio">Enter the portfolio</span><i>↘</i></a>
+        </article>
+
+        <div class="sequence-rail" aria-hidden="true">
+          <div class="sequence-rail__meta">
+            <span id="sequenceNumber">01 / 04</span>
+            <span data-i18n="scrollTransform">SCROLL TO TRANSFORM</span>
+          </div>
+          <div class="sequence-rail__track"><i id="sequenceProgress"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="statement section-shell">
+      <div class="section-index">01 — PROFILE</div>
+      <div class="statement__copy reveal-on-scroll">
+        <p class="section-kicker" data-i18n="statementKicker">A profile in motion</p>
+        <h2 data-i18n-html="statementTitle">Between <em>systems</em><br>and <em>stories.</em></h2>
+      </div>
+      <div class="statement__body reveal-on-scroll">
+        <p data-i18n="statementBody">I am a Computer Engineering student and the founder of AuraDigital. My work lives where product design, cloud infrastructure and cybersecurity meet.</p>
+        <div class="profile-facts">
+          <div><span data-i18n="locationLabel">Location</span><b>Istanbul, TR</b></div>
+          <div><span data-i18n="directionLabel">Direction</span><b>SOC · Security Engineering</b></div>
+          <div><span data-i18n="buildingLabel">Building</span><b>AuraDigital · AuraMenu</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="work section-shell" id="work">
+      <div class="section-heading reveal-on-scroll">
+        <div>
+          <p class="section-kicker" data-i18n="workKicker">Selected systems</p>
+          <h2 data-i18n-html="workTitle">Ideas that became<br><em>real products.</em></h2>
+        </div>
+        <p data-i18n="workIntro">Strategy, interface, code and deployment—connected into one practical workflow.</p>
+      </div>
+
+      <div class="project-grid">
+        <a class="project-card project-card--wide tilt-card reveal-on-scroll" href="https://auradigital.ink" target="_blank" rel="noopener">
+          <div class="project-card__top"><span>01 / AURA</span><i>↗</i></div>
+          <div class="project-card__mark">A<span>·</span></div>
+          <div class="project-card__copy">
+            <h3>AuraDigital</h3>
+            <p data-i18n="auraDescription">A digital studio for websites, QR menus, NFC experiences and practical growth systems.</p>
+            <div class="tags"><span>WEB</span><span>CLOUD</span><span>AUTOMATION</span></div>
+          </div>
+        </a>
+
+        <a class="project-card tilt-card reveal-on-scroll" href="https://auramenu.space" target="_blank" rel="noopener">
+          <div class="project-card__top"><span>02 / MENU</span><i>↗</i></div>
+          <div class="menu-orbit" aria-hidden="true"><i></i><i></i><b>QR</b></div>
+          <div class="project-card__copy">
+            <h3>AuraMenu</h3>
+            <p data-i18n="menuDescription">Restaurant menus created, previewed and published through a streamlined digital flow.</p>
+            <div class="tags"><span>PRODUCT</span><span>UI/UX</span><span>QR</span></div>
+          </div>
+        </a>
+
+        <article class="project-card project-card--signal tilt-card reveal-on-scroll">
+          <video
+            id="signalVideo"
+            muted
+            playsinline
+            loop
+            preload="metadata"
+            poster="assets/media/robot-signal-poster.jpg"
+            aria-hidden="true"
+            tabindex="-1"
+          >
+            <source src="assets/media/robot-signal.mp4" type="video/mp4">
+          </video>
+          <div class="signal-overlay"></div>
+          <div class="project-card__top"><span>03 / SIGNAL</span><i class="live-dot"></i></div>
+          <div class="signal-copy">
+            <span data-i18n="signalLabel">CREATIVE EXPERIMENT</span>
+            <h3 data-i18n-html="signalTitle">Motion with<br>purpose.</h3>
+            <p data-i18n="signalDescription">AI-assisted visuals turned into an interactive story—not decoration, but direction.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="security section-shell" id="security">
+      <div class="security__copy reveal-on-scroll">
+        <p class="section-kicker" data-i18n="securitySectionKicker">Cybersecurity direction</p>
+        <h2 data-i18n-html="securitySectionTitle">Observe the signal.<br><em>Understand the system.</em></h2>
+        <p data-i18n="securitySectionBody">I am growing toward SOC and security engineering through hands-on labs, network analysis, web testing and automation.</p>
+        <a class="text-link" href="https://github.com/Dhiaeddine-mahouachi" target="_blank" rel="noopener"><span data-i18n="viewGithub">View GitHub</span><i>↗</i></a>
+      </div>
+
+      <div class="security-console tilt-card reveal-on-scroll">
+        <div class="console-head"><span>SECURITY_STACK.EXE</span><i></i></div>
+        <div class="console-radar" aria-hidden="true">
+          <div class="radar-ring radar-ring--one"></div>
+          <div class="radar-ring radar-ring--two"></div>
+          <div class="radar-ring radar-ring--three"></div>
+          <div class="radar-sweep"></div>
+          <b>DM</b>
+          <i class="radar-node radar-node--one"></i>
+          <i class="radar-node radar-node--two"></i>
+          <i class="radar-node radar-node--three"></i>
+        </div>
+        <div class="skill-list">
+          <div><span>01</span><b>Linux</b><small>SYSTEMS</small></div>
+          <div><span>02</span><b>Wireshark</b><small>TRAFFIC</small></div>
+          <div><span>03</span><b>Burp Suite</b><small>WEB</small></div>
+          <div><span>04</span><b>Nmap</b><small>RECON</small></div>
+          <div><span>05</span><b>Python</b><small>AUTOMATION</small></div>
+          <div><span>06</span><b>Cloudflare</b><small>INFRA</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact section-shell" id="contact">
+      <div class="contact__glow" aria-hidden="true"></div>
+      <p class="section-kicker reveal-on-scroll" data-i18n="contactKicker">The next chapter</p>
+      <h2 class="reveal-on-scroll" data-i18n-html="contactTitle">Let’s build something<br><em>worth securing.</em></h2>
+      <p class="contact__lead reveal-on-scroll" data-i18n="contactBody">Open to cybersecurity internships, junior opportunities and ambitious digital collaborations.</p>
+      <div class="contact__actions reveal-on-scroll">
+        <a class="button button--primary" href="https://auradigital.ink" target="_blank" rel="noopener"><span data-i18n="visitAura">Visit AuraDigital</span><i>↗</i></a>
+        <a class="button button--glass" href="https://github.com/Dhiaeddine-mahouachi" target="_blank" rel="noopener"><span>GitHub</span><i>↗</i></a>
+        <button class="button button--glass" id="copyLink" type="button"><span data-i18n="copyLink">Copy site link</span><i>⧉</i></button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© 2026 DHIA MAHOUACHI</span>
+    <span data-i18n="footerLine">ISTANBUL · COMPUTER ENGINEERING · CYBERSECURITY</span>
+    <a href="#top">TOP ↑</a>
+  </footer>
+
+  <noscript>
+    <div class="noscript">This cinematic portfolio needs JavaScript for the scroll-controlled sequence. The rest of the page remains available below.</div>
+  </noscript>
+</body>
+</html>
