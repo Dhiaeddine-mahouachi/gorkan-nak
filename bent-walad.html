@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bent Walad Test</title>
+<style>html,body{margin:0;min-height:100%;background:#0b1020;color:#fff;font-family:system-ui}#status{padding:24px;text-align:center;color:#9eabc2}</style>
+</head>
+<body>
+<div id="status">Loading Bent Walad test…</div>
+<script>
+fetch('https://raw.githubusercontent.com/Dhiaeddine-mahouachi/empty-2/main/public/bent-walad.html',{cache:'no-store'})
+  .then(r=>{if(!r.ok)throw new Error('Unable to load game');return r.text()})
+  .then(html=>{document.open();document.write(html);document.close()})
+  .catch(err=>{document.getElementById('status').textContent='Game could not load: '+err.message});
+</script>
+</body>
+</html>
