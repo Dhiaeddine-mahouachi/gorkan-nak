@@ -774,7 +774,7 @@ function enterRoom(nextRoomCode, host) {
         socket.readyState
       ])
     );
-    console.info("Bent Walad relay states", relayStates);
+    console.info("Bent Walad relay states", JSON.stringify(relayStates));
   }, 3000);
 
   if (host) {
