@@ -751,7 +751,7 @@ function enterRoom(nextRoomCode, host) {
   room = joinRoom(
     {
       appId: APP_ID,
-      relayConfig: { redundancy: 5, warnOnRelayFailure: false }
+      relayConfig: { redundancy: 5, warnOnRelayFailure: true }
     },
     `${ROOM_PREFIX}${roomCode}`,
     {
