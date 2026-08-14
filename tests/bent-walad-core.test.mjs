@@ -78,6 +78,18 @@ test("category parsing keeps valid checkbox choices and rejects unsafe values", 
   assert.equal(parseCategories(CATEGORY_OPTIONS).length, 18);
 });
 
+test("Arabic comic artwork replaces emoji with local geometric motifs", () => {
+  const emojiOrDingbat =
+    /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}]/u;
+
+  assert.equal(emojiOrDingbat.test(gameHtml), false);
+  assert.match(gameHtml, /id="icon-star8"/);
+  assert.match(gameHtml, /id="icon-arch"/);
+  assert.match(gameHtml, /id="icon-pen"/);
+  assert.match(gameHtml, /class="comicWord">يلا<\/span>/);
+  assert.match(gameHtml, /class="resultWord">مبروك<\/span>/);
+});
+
 test("network text is bounded and non-string answers are rejected", () => {
   assert.equal(sanitizeName("  ضياء\u0000  "), "ضياء");
   assert.deepEqual(sanitizeAnswers(["تونس", { unsafe: true }, 42], 3), [
