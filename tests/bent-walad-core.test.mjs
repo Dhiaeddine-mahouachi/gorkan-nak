@@ -1,7 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
 import {
+  CATEGORY_OPTIONS,
+  MAX_CATEGORIES,
+  OPTIONAL_CATEGORIES,
+  STANDARD_CATEGORIES,
   calculateRoundPoints,
   normalizeArabic,
   parseCategories,
@@ -9,6 +14,11 @@ import {
   sanitizeName,
   startsWithLetter
 } from "../bent-walad-core.mjs";
+
+const gameHtml = readFileSync(
+  new URL("../bent-walad.html", import.meta.url),
+  "utf8"
+);
 
 test("Arabic normalization handles common equivalent forms", () => {
   assert.equal(normalizeArabic("  إِبْرَاهِيمـ  "), "ابراهيم");
@@ -23,10 +33,49 @@ test("letter validation uses normalized Arabic", () => {
   assert.equal(startsWithLetter("", "ب"), false);
 });
 
-test("category parsing accepts Arabic and Latin commas and has a safe fallback", () => {
-  assert.deepEqual(parseCategories("ولد، بنت, حيوان"), ["ولد", "بنت", "حيوان"]);
-  assert.equal(parseCategories("واحد، اثنين").length, 6);
-  assert.equal(parseCategories(Array(20).fill("خانة").join("،")).length, 12);
+test("category options provide 8 checked standards and 10 optional choices", () => {
+  assert.deepEqual(STANDARD_CATEGORIES, [
+    "اسم ولد",
+    "اسم بنت",
+    "حيوان",
+    "مهنة",
+    "بلد",
+    "أكلة",
+    "اسم مشهور",
+    "جماد"
+  ]);
+  assert.equal(OPTIONAL_CATEGORIES.length, 10);
+  assert.equal(CATEGORY_OPTIONS.length, 18);
+  assert.equal(MAX_CATEGORIES, 18);
+});
+
+test("room setup renders category checkboxes with only standards preselected", () => {
+  const checkboxPattern =
+    /<input type="checkbox" name="category" value="([^"]+)"([^>]*)\/>/g;
+  const checkboxes = [...gameHtml.matchAll(checkboxPattern)];
+
+  assert.deepEqual(
+    checkboxes.map(match => match[1]),
+    CATEGORY_OPTIONS
+  );
+  assert.deepEqual(
+    checkboxes.filter(match => /\bchecked\b/.test(match[2])).map(match => match[1]),
+    STANDARD_CATEGORIES
+  );
+  assert.equal(gameHtml.includes('id="categories"'), false);
+});
+
+test("category parsing keeps valid checkbox choices and rejects unsafe values", () => {
+  assert.deepEqual(
+    parseCategories(["اسم ولد", "حيوان", "نبات", "نبات", "خانة مزيفة"]),
+    ["اسم ولد", "حيوان", "نبات"]
+  );
+  assert.deepEqual(
+    parseCategories("اسم ولد، اسم بنت, حيوان"),
+    ["اسم ولد", "اسم بنت", "حيوان"]
+  );
+  assert.deepEqual(parseCategories(["نبات", "لون"]), STANDARD_CATEGORIES);
+  assert.equal(parseCategories(CATEGORY_OPTIONS).length, 18);
 });
 
 test("network text is bounded and non-string answers are rejected", () => {
@@ -37,6 +86,7 @@ test("network text is bounded and non-string answers are rejected", () => {
     ""
   ]);
   assert.equal(sanitizeAnswers(["ا".repeat(120)], 1)[0].length, 80);
+  assert.equal(sanitizeAnswers(Array(30).fill("جواب"), 30).length, 18);
 });
 
 test("scoring rejects blanks, wrong letters, duplicates, and manual rejections", () => {

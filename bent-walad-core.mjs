@@ -1,7 +1,38 @@
 export const LETTERS = [..."ابتثجحخدذرزسشصضطظعغفقكلمنهوي"];
 
+export const STANDARD_CATEGORIES = Object.freeze([
+  "اسم ولد",
+  "اسم بنت",
+  "حيوان",
+  "مهنة",
+  "بلد",
+  "أكلة",
+  "اسم مشهور",
+  "جماد"
+]);
+
+export const OPTIONAL_CATEGORIES = Object.freeze([
+  "نبات",
+  "لون",
+  "مدينة",
+  "رياضة",
+  "ماركة",
+  "وسيلة نقل",
+  "شخصية كرتونية",
+  "فيلم أو مسلسل",
+  "لباس",
+  "عضو من الجسم"
+]);
+
+export const CATEGORY_OPTIONS = Object.freeze([
+  ...STANDARD_CATEGORIES,
+  ...OPTIONAL_CATEGORIES
+]);
+export const MAX_CATEGORIES = CATEGORY_OPTIONS.length;
+
 const DIACRITICS = /[\u064B-\u065F\u0670\u06D6-\u06ED]/g;
 const CONTROL_CHARS = /[\u0000-\u001F\u007F]/g;
+const CATEGORY_SET = new Set(CATEGORY_OPTIONS);
 
 export function normalizeArabic(value) {
   return String(value ?? "")
@@ -32,7 +63,10 @@ export function sanitizeAnswer(value) {
 }
 
 export function sanitizeAnswers(value, categoryCount) {
-  const count = Math.max(0, Math.min(12, Number(categoryCount) || 0));
+  const count = Math.max(
+    0,
+    Math.min(MAX_CATEGORIES, Number(categoryCount) || 0)
+  );
   const source = Array.isArray(value) ? value : [];
   return Array.from({ length: count }, (_, index) =>
     sanitizeAnswer(source[index])
@@ -40,15 +74,28 @@ export function sanitizeAnswers(value, categoryCount) {
 }
 
 export function parseCategories(value) {
-  const categories = String(value ?? "")
-    .split(/[،,]/)
-    .map(category => category.replace(CONTROL_CHARS, "").trim().slice(0, 32))
-    .filter(Boolean)
-    .slice(0, 12);
+  const source = Array.isArray(value)
+    ? value
+    : String(value ?? "").split(/[،,]/);
+  const categories = [];
+
+  source.forEach(item => {
+    const category = String(item ?? "")
+      .replace(CONTROL_CHARS, "")
+      .trim()
+      .slice(0, 32);
+    if (
+      CATEGORY_SET.has(category) &&
+      !categories.includes(category) &&
+      categories.length < MAX_CATEGORIES
+    ) {
+      categories.push(category);
+    }
+  });
 
   return categories.length >= 3
     ? categories
-    : ["اسم ولد", "اسم بنت", "حيوان", "مهنة", "بلد", "أكلة"];
+    : [...STANDARD_CATEGORIES];
 }
 
 export function getDuplicateCounts(categories, playerIds, answers) {
