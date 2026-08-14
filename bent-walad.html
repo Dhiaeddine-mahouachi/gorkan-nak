@@ -82,6 +82,7 @@
 
 <script type="module">
 import {
+  getRelaySockets,
   joinRoom,
   selfId
 } from "https://cdn.jsdelivr.net/npm/@trystero-p2p/mqtt@0.25.3/+esm";
@@ -766,6 +767,15 @@ function enterRoom(nextRoomCode, host) {
     }
   );
   setupRoom();
+  window.setTimeout(() => {
+    const relayStates = Object.fromEntries(
+      Object.entries(getRelaySockets()).map(([url, socket]) => [
+        url,
+        socket.readyState
+      ])
+    );
+    console.info("Bent Walad relay states", relayStates);
+  }, 3000);
 
   if (host) {
     hostId = selfId;
