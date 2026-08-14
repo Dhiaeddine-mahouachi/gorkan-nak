@@ -755,7 +755,8 @@ function enterRoom(nextRoomCode, host) {
     },
     `${ROOM_PREFIX}${roomCode}`,
     {
-      onJoinError: () => {
+      onJoinError: details => {
+        console.warn("Bent Walad join failure", details?.error ?? details);
         if (!hostSeen && !isHost) {
           setNetStatus("● تعذر الاتصال", "error");
           qs("#guestLobby").textContent =
