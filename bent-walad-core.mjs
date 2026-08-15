@@ -135,13 +135,15 @@ export function calculateRoundPoints({
         Boolean(normalized) &&
         (duplicates.get(`${categoryIndex}:${normalized}`) ?? 0) > 1;
       const key = `${playerId}:${categoryIndex}`;
+      const hasHostDecision = Object.prototype.hasOwnProperty.call(
+        validity,
+        key
+      );
+      const accepted = hasHostDecision
+        ? validity[key] === true
+        : !duplicate && startsWithLetter(answer, letter);
 
-      if (
-        answer &&
-        !duplicate &&
-        startsWithLetter(answer, letter) &&
-        validity[key] !== false
-      ) {
+      if (answer && accepted) {
         total += 1;
       }
     });
