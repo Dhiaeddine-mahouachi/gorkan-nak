@@ -24,6 +24,11 @@ export const HIJAZ_MELODY = Object.freeze([
 const MUSIC_STEP_SECONDS = 60 / 92 / 2;
 const LOOK_AHEAD_SECONDS = 0.55;
 const SCHEDULER_INTERVAL_MS = 110;
+export const AUDIO_LEVELS = Object.freeze({
+  master: 1,
+  music: 0.38,
+  effects: 0.94
+});
 
 function readPreference(storageKey) {
   try {
@@ -76,9 +81,9 @@ export function createGameAudio({
     musicGain = context.createGain();
     effectsGain = context.createGain();
 
-    masterGain.gain.value = enabled ? 0.86 : 0.0001;
-    musicGain.gain.value = 0.22;
-    effectsGain.gain.value = 0.72;
+    masterGain.gain.value = enabled ? AUDIO_LEVELS.master : 0.0001;
+    musicGain.gain.value = AUDIO_LEVELS.music;
+    effectsGain.gain.value = AUDIO_LEVELS.effects;
     musicGain.connect(masterGain);
     effectsGain.connect(masterGain);
     masterGain.connect(context.destination);
@@ -370,7 +375,11 @@ export function createGameAudio({
       const running = context.state === "running";
       if (running) {
         masterGain.gain.cancelScheduledValues(context.currentTime);
-        masterGain.gain.setTargetAtTime(0.86, context.currentTime, 0.025);
+        masterGain.gain.setTargetAtTime(
+          AUDIO_LEVELS.master,
+          context.currentTime,
+          0.025
+        );
         startScheduler();
         if (!unlockedOnce) {
           unlockedOnce = true;

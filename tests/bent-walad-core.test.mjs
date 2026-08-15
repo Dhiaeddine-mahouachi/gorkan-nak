@@ -104,7 +104,30 @@ test("Arabic-style soundtrack and interaction sounds are wired locally", () => {
   assert.match(gameAudioModule, /function frameDrum/);
   assert.match(gameAudioModule, /kind === "word-win"/);
   assert.match(gameAudioModule, /kind === "word-lose"/);
+  assert.match(gameAudioModule, /music: 0\.38/);
+  assert.match(gameAudioModule, /effects: 0\.94/);
   assert.equal(/https?:\/\//.test(gameAudioModule), false);
+});
+
+test("active-room reconnects restore known players instead of rejecting them", () => {
+  assert.match(gameHtml, /findReconnectPlayerId/);
+  assert.match(gameHtml, /knownPlayerId && restorePlayer/);
+  assert.match(gameHtml, /reconnectToken/);
+  assert.match(gameHtml, /waitForHostReconnect/);
+  assert.match(
+    gameHtml,
+    /setTimeout\(\(\) => \{[\s\S]*?show\("lost"\);[\s\S]*?\}, 10000\)/
+  );
+  assert.match(gameHtml, /if \(startsNewRound\) \{[\s\S]*?myAnswers = Array/);
+});
+
+test("all game buttons have a sound path including the sound toggle", () => {
+  assert.match(gameHtml, /event\.target\.closest\?\.\("button"\)/);
+  assert.match(gameHtml, /button\.id === "stopBtn" \? "stop" : "click"/);
+  assert.match(
+    gameHtml,
+    /qs\("#soundToggle"\)[\s\S]*?gameAudio\.play\("click"\)/
+  );
 });
 
 test("review uses two decision buttons with win and loss feedback", () => {

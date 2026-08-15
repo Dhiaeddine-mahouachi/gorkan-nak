@@ -171,6 +171,11 @@ import {
   sanitizeName,
   startsWithLetter
 } from "./bent-walad-core.mjs";
+import {
+  getReconnectToken,
+  rebindPlayerState,
+  sanitizeReconnectToken
+} from "./bent-walad-room.mjs";
 
 const APP_ID = "dhiamahouachi-bent-walad-v2";
 const ROOM_PREFIX = "bw2-";
@@ -242,6 +247,7 @@ let isHost = false;
 let hostId = "";
 let roomCode = "";
 let myName = "";
+let reconnectToken = "";
 let roundCount = 5;
 let categories = [];
 let players = new Map();
@@ -255,6 +261,7 @@ let stoppedById = "";
 let validity = {};
 let roundPoints = {};
 let actions = {};
+let reconnectTokens = new Map();
 let hostSeen = false;
 let roundLocked = false;
 let roundSubmissions = new Set();
@@ -264,6 +271,7 @@ let answerTimer = 0;
 let roundFinalizeTimer = 0;
 let guestStopTimer = 0;
 let connectTimer = 0;
+let hostDisconnectTimer = 0;
 let toastTimer = 0;
 let reviewSoundKeys = new Set();
 
@@ -388,6 +396,59 @@ function syncGuests() {
   sendState();
 }
 
+function sendHello(target) {
+  if (isHost || !actions.hello || !target) return;
+  actions.hello
+    .send({ name: myName, reconnectToken }, { target })
+    .catch(() => toast("تعذر إعادة الاتصال بصاحب الغرفة"));
+}
+
+function findReconnectPlayerId(token, name) {
+  if (token) {
+    for (const [playerId, savedToken] of reconnectTokens) {
+      if (savedToken === token && players.has(playerId)) return playerId;
+    }
+  }
+
+  const offlineMatches = playerList().filter(
+    player =>
+      player.id !== hostId &&
+      player.online === false &&
+      player.name === name
+  );
+  return offlineMatches.length === 1 ? offlineMatches[0].id : "";
+}
+
+function restorePlayer(previousId, peerId, token) {
+  const restored = rebindPlayerState({
+    players,
+    previousId,
+    nextId: peerId,
+    allAnswers,
+    roundPoints,
+    validity,
+    roundSubmissions,
+    stoppedById
+  });
+  if (!restored.moved) return false;
+
+  stoppedById = restored.stoppedById;
+  const savedToken = token || reconnectTokens.get(previousId) || "";
+  reconnectTokens.delete(previousId);
+  if (savedToken) reconnectTokens.set(peerId, savedToken);
+  return true;
+}
+
+function waitForHostReconnect() {
+  window.clearTimeout(hostDisconnectTimer);
+  setNetStatus("جاري إعادة الاتصال…", "connecting");
+  hostDisconnectTimer = window.setTimeout(() => {
+    if (isHost || !room || status === "home") return;
+    setNetStatus("انقطع الاتصال", "error");
+    show("lost");
+  }, 10000);
+}
+
 function applyState(payload, senderId) {
   if (isHost || !payload || String(payload.hostId ?? "") !== senderId) return;
   if (hostId && senderId !== hostId) return;
@@ -399,6 +460,10 @@ function applyState(payload, senderId) {
   const nextStatus = VALID_STATUSES.has(payload.status)
     ? payload.status
     : "lobby";
+  const nextRound = clampInteger(payload.currentRound, 0, 30, 0);
+  const startsNewRound =
+    nextStatus === "playing" &&
+    (status !== "playing" || currentRound !== nextRound);
   const nextPlayers = new Map();
   (Array.isArray(payload.players) ? payload.players : []).forEach(value => {
     const player = safePlayer(value);
@@ -439,7 +504,7 @@ function applyState(payload, senderId) {
   hostSeen = true;
   hostId = senderId;
   status = nextStatus;
-  currentRound = clampInteger(payload.currentRound, 0, 30, 0);
+  currentRound = nextRound;
   currentLetter = LETTERS.includes(payload.currentLetter)
     ? payload.currentLetter
     : "";
@@ -448,6 +513,10 @@ function applyState(payload, senderId) {
     : [];
   roundCount = clampInteger(payload.roundCount, 1, 30, 5);
   categories = nextCategories;
+  if (startsNewRound) {
+    myAnswers = Array(nextCategories.length).fill("");
+    reviewSoundKeys = new Set();
+  }
   stoppedById = nextPlayers.has(payload.stoppedById)
     ? payload.stoppedById
     : "";
@@ -461,6 +530,7 @@ function applyState(payload, senderId) {
   if (!preservePendingStop) roundLocked = false;
   window.clearTimeout(connectTimer);
   window.clearTimeout(guestStopTimer);
+  window.clearTimeout(hostDisconnectTimer);
   setNetStatus("متصل بالغرفة");
   render();
 }
@@ -774,9 +844,8 @@ function setupRoom() {
     if (isHost) {
       window.setTimeout(() => sendState(peerId), 140);
     } else {
-      actions.hello
-        .send({ name: myName }, { target: peerId })
-        .catch(() => toast("تعذر إرسال اسم اللاعب"));
+      if (peerId === hostId) window.clearTimeout(hostDisconnectTimer);
+      sendHello(peerId);
     }
   };
 
@@ -786,6 +855,7 @@ function setupRoom() {
       if (!player) return;
       if (status === "lobby") {
         players.delete(peerId);
+        reconnectTokens.delete(peerId);
       } else {
         players.set(peerId, { ...player, online: false });
       }
@@ -795,16 +865,27 @@ function setupRoom() {
     }
 
     if (peerId === hostId) {
-      setNetStatus("انقطع الاتصال", "error");
-      show("lost");
+      waitForHostReconnect();
     }
   };
 
   actions.hello.onMessage = (data, { peerId }) => {
     if (!isHost) return;
+    const name = sanitizeName(data?.name) || "لاعب";
+    const token = sanitizeReconnectToken(data?.reconnectToken);
+    const knownPlayerId = players.has(peerId)
+      ? peerId
+      : findReconnectPlayerId(token, name);
+
     if (status !== "lobby") {
+      if (knownPlayerId && restorePlayer(knownPlayerId, peerId, token)) {
+        render();
+        syncGuests();
+        toast(`${name} رجع للغرفة`);
+        return;
+      }
       actions.reject.send(
-        { hostId, message: "اللعبة بدأت بالفعل" },
+        { hostId, message: "اللعبة بدأت بالفعل. استعمل نفس الاسم والجهاز للرجوع." },
         { target: peerId }
       );
       return;
@@ -818,13 +899,13 @@ function setupRoom() {
       return;
     }
 
-    const name = sanitizeName(data?.name);
     players.set(peerId, {
       id: peerId,
-      name: name || "لاعب",
+      name,
       score: players.get(peerId)?.score || 0,
       online: true
     });
+    if (token) reconnectTokens.set(peerId, token);
     render();
     syncGuests();
   };
@@ -895,6 +976,7 @@ function setupRoom() {
 function enterRoom(nextRoomCode, host) {
   roomCode = nextRoomCode;
   isHost = host;
+  reconnectToken = host ? "" : getReconnectToken(roomCode, myName);
   hostSeen = host;
   status = "lobby";
   setNetStatus("جاري الاتصال…", "connecting");
@@ -1055,6 +1137,7 @@ function clearGameTimers() {
     roundFinalizeTimer,
     guestStopTimer,
     connectTimer,
+    hostDisconnectTimer,
     toastTimer
   ].forEach(timer => window.clearTimeout(timer));
 }
@@ -1067,8 +1150,10 @@ function leaveRoom({ keepError = false } = {}) {
   room = null;
   actions = {};
   players = new Map();
+  reconnectTokens = new Map();
   hostId = "";
   roomCode = "";
+  reconnectToken = "";
   status = "home";
   isHost = false;
   hostSeen = false;
@@ -1088,10 +1173,13 @@ qs("#soundToggle").addEventListener("click", async () => {
   const audioState = gameAudio.getState();
   if (!audioState.supported) return;
   if (audioState.running) {
+    gameAudio.play("click");
+    await new Promise(resolve => window.setTimeout(resolve, 90));
     await gameAudio.setEnabled(false);
     return;
   }
   await gameAudio.setEnabled(true);
+  gameAudio.play("click");
 });
 
 qs("#audioGateBtn").addEventListener("click", async () => {
@@ -1285,11 +1373,17 @@ window.addEventListener("offline", () => {
 window.addEventListener("online", () => {
   setNetStatus(room ? "جاري إعادة الاتصال…" : "جاهز للعب أونلاين", room ? "connecting" : "");
 });
-window.addEventListener("pagehide", () => {
-  try {
-    room?.leave();
-  } catch {}
+window.addEventListener("pagehide", event => {
+  if (!event.persisted) {
+    try {
+      room?.leave();
+    } catch {}
+  }
   gameAudio.setPageVisible(false);
+});
+window.addEventListener("pageshow", event => {
+  gameAudio.setPageVisible(true);
+  if (event.persisted && room && !isHost && hostId) sendHello(hostId);
 });
 document.addEventListener("visibilitychange", () => {
   gameAudio.setPageVisible(!document.hidden);
