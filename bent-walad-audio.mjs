@@ -76,9 +76,9 @@ export function createGameAudio({
     musicGain = context.createGain();
     effectsGain = context.createGain();
 
-    masterGain.gain.value = enabled ? 0.7 : 0.0001;
-    musicGain.gain.value = 0.11;
-    effectsGain.gain.value = 0.52;
+    masterGain.gain.value = enabled ? 0.86 : 0.0001;
+    musicGain.gain.value = 0.22;
+    effectsGain.gain.value = 0.72;
     musicGain.connect(masterGain);
     effectsGain.connect(masterGain);
     masterGain.connect(context.destination);
@@ -296,6 +296,39 @@ export function createGameAudio({
       return;
     }
 
+    if (kind === "word-win") {
+      [3, 4, 7].forEach((degree, index) => {
+        effectTone({
+          frequency: HIJAZ_SCALE[degree],
+          endFrequency: HIJAZ_SCALE[degree] * 1.04,
+          duration: 0.18,
+          volume: 0.095,
+          type: "triangle",
+          delay: index * 0.075
+        });
+      });
+      return;
+    }
+
+    if (kind === "word-lose") {
+      effectTone({
+        frequency: 310,
+        endFrequency: 82,
+        duration: 0.32,
+        volume: 0.13,
+        type: "sawtooth"
+      });
+      effectTone({
+        frequency: 145,
+        endFrequency: 48,
+        duration: 0.28,
+        volume: 0.15,
+        type: "sine",
+        delay: 0.045
+      });
+      return;
+    }
+
     effectTone({
       frequency: 420,
       endFrequency: 610,
@@ -337,7 +370,7 @@ export function createGameAudio({
       const running = context.state === "running";
       if (running) {
         masterGain.gain.cancelScheduledValues(context.currentTime);
-        masterGain.gain.setTargetAtTime(0.7, context.currentTime, 0.025);
+        masterGain.gain.setTargetAtTime(0.86, context.currentTime, 0.025);
         startScheduler();
         if (!unlockedOnce) {
           unlockedOnce = true;

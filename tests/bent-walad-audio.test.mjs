@@ -103,7 +103,15 @@ test("audio engine unlocks, plays every effect, mutes, and resumes safely", asyn
   assert.equal(await audio.unlock(), true);
   assert.equal(audio.getState().running, true);
 
-  ["type", "select", "click", "stop", "success"].forEach(effect => {
+  [
+    "type",
+    "select",
+    "click",
+    "stop",
+    "success",
+    "word-win",
+    "word-lose"
+  ].forEach(effect => {
     audio.play(effect);
   });
   assert.ok(FakeAudioContext.latest.createdNodes > 20);

@@ -102,7 +102,19 @@ test("Arabic-style soundtrack and interaction sounds are wired locally", () => {
   assert.match(gameAudioModule, /HIJAZ_SCALE/);
   assert.match(gameAudioModule, /HIJAZ_MELODY/);
   assert.match(gameAudioModule, /function frameDrum/);
+  assert.match(gameAudioModule, /kind === "word-win"/);
+  assert.match(gameAudioModule, /kind === "word-lose"/);
   assert.equal(/https?:\/\//.test(gameAudioModule), false);
+});
+
+test("review uses two decision buttons with win and loss feedback", () => {
+  assert.match(gameHtml, /acceptDecision/);
+  assert.match(gameHtml, /rejectDecision/);
+  assert.match(gameHtml, /wordAccepted/);
+  assert.match(gameHtml, /wordRejected/);
+  assert.match(gameHtml, /gameAudio\.play\("word-win"\)/);
+  assert.match(gameHtml, /gameAudio\.play\("word-lose"\)/);
+  assert.match(gameHtml, /id="audioGate"/);
 });
 
 test("network text is bounded and non-string answers are rejected", () => {
@@ -130,4 +142,24 @@ test("scoring rejects blanks, wrong letters, duplicates, and manual rejections",
   });
 
   assert.deepEqual(points, { p1: 0, p2: 1, p3: 1 });
+});
+
+test("the host can explicitly accept or reject an automatically judged word", () => {
+  const points = calculateRoundPoints({
+    playerIds: ["p1", "p2"],
+    categories: ["بلد", "حيوان"],
+    answers: {
+      p1: ["تونس", "بطة"],
+      p2: ["تونس", "تمساح"]
+    },
+    letter: "ت",
+    validity: {
+      "p1:0": true,
+      "p1:1": false,
+      "p2:0": false,
+      "p2:1": true
+    }
+  });
+
+  assert.deepEqual(points, { p1: 1, p2: 1 });
 });
