@@ -117,6 +117,12 @@ test("review uses two decision buttons with win and loss feedback", () => {
   assert.match(gameHtml, /id="audioGate"/);
 });
 
+test("opening prompt and brand mark do not use the old letter logo", () => {
+  assert.match(gameHtml, /id="audioGateBtn"[^>]*>[\s\S]*اضغط للبدء<\/button>/);
+  assert.match(gameHtml, /class="logoMark"/);
+  assert.doesNotMatch(gameHtml, /class="logo">ب و<\/div>/);
+});
+
 test("network text is bounded and non-string answers are rejected", () => {
   assert.equal(sanitizeName("  ضياء\u0000  "), "ضياء");
   assert.deepEqual(sanitizeAnswers(["تونس", { unsafe: true }, 42], 3), [
