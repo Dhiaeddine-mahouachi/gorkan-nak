@@ -19,6 +19,10 @@ const gameHtml = readFileSync(
   new URL("../bent-walad.html", import.meta.url),
   "utf8"
 );
+const gameAudioModule = readFileSync(
+  new URL("../bent-walad-audio.mjs", import.meta.url),
+  "utf8"
+);
 
 test("Arabic normalization handles common equivalent forms", () => {
   assert.equal(normalizeArabic("  إِبْرَاهِيمـ  "), "ابراهيم");
@@ -88,6 +92,17 @@ test("Arabic comic artwork replaces emoji with local geometric motifs", () => {
   assert.match(gameHtml, /id="icon-pen"/);
   assert.match(gameHtml, /class="comicWord">يلا<\/span>/);
   assert.match(gameHtml, /class="resultWord">مبروك<\/span>/);
+});
+
+test("Arabic-style soundtrack and interaction sounds are wired locally", () => {
+  assert.match(gameHtml, /id="soundToggle"/);
+  assert.match(gameHtml, /createGameAudio/);
+  assert.match(gameHtml, /gameAudio\.play\("type"\)/);
+  assert.match(gameHtml, /gameAudio\.play\(button\.id === "stopBtn"/);
+  assert.match(gameAudioModule, /HIJAZ_SCALE/);
+  assert.match(gameAudioModule, /HIJAZ_MELODY/);
+  assert.match(gameAudioModule, /function frameDrum/);
+  assert.equal(/https?:\/\//.test(gameAudioModule), false);
 });
 
 test("network text is bounded and non-string answers are rejected", () => {
