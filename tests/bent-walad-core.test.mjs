@@ -121,6 +121,13 @@ test("active-room reconnects restore known players instead of rejecting them", (
   assert.match(gameHtml, /if \(startsNewRound\) \{[\s\S]*?myAnswers = Array/);
 });
 
+test("multiplayer uses the durable room relay instead of direct WebRTC", () => {
+  assert.match(gameHtml, /from "\.\/bent-walad-relay\.mjs"/);
+  assert.match(gameHtml, /relayUrl: RELAY_URL/);
+  assert.doesNotMatch(gameHtml, /@trystero-p2p/);
+  assert.doesNotMatch(gameHtml, /الغرفة تعمل مباشرة بين اللاعبين/);
+});
+
 test("all game buttons have a sound path including the sound toggle", () => {
   assert.match(gameHtml, /event\.target\.closest\?\.\("button"\)/);
   assert.match(gameHtml, /button\.id === "stopBtn" \? "stop" : "click"/);

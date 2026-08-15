@@ -151,15 +151,12 @@ body:before{content:"";position:fixed;inset:0 0 auto;height:8px;background:repea
 
 <section id="results" class="screen"><div class="panel"><div class="resultMotif" aria-hidden="true"><svg class="uiIcon"><use href="#icon-star8"></use></svg><span class="resultWord">مبروك</span><svg class="uiIcon"><use href="#icon-star8"></use></svg></div><h2 id="resultTitle" class="sectionHeading centered">النتيجة</h2><div id="leaderboard" class="leader"></div><div id="hostResults" class="hidden"><button class="primary wide" id="nextBtn">الجولة التالية</button></div><div id="guestResults" class="statusNote hidden">استنى صاحب الغرفة…</div></div></section>
 
-<section id="lost" class="screen"><div class="panel"><div class="wait"><div class="lostArch" aria-hidden="true"><svg class="uiIcon"><use href="#icon-disconnect"></use></svg></div><h2>انقطع صاحب الغرفة</h2><p>الغرفة تعمل مباشرة بين اللاعبين، لذلك لازم صاحب الغرفة يبقى فاتح اللعبة.</p><button class="primary" onclick="location.href=location.pathname">ارجع للرئيسية</button></div></div></section>
+<section id="lost" class="screen"><div class="panel"><div class="wait"><div class="lostArch" aria-hidden="true"><svg class="uiIcon"><use href="#icon-disconnect"></use></svg></div><h2>انقطع صاحب الغرفة</h2><p>صاحب الغرفة خرج أو انقطع عنه الإنترنت. اطلب منه يفتح اللعبة من جديد.</p><button class="primary" onclick="location.href=location.pathname">ارجع للرئيسية</button></div></div></section>
 <div id="toast" class="toast"></div>
 </div>
 
 <script type="module">
-import {
-  joinRoom,
-  selfId
-} from "https://esm.run/@trystero-p2p/mqtt@0.25.3";
+import { joinRoom, selfId } from "./bent-walad-relay.mjs";
 import { createGameAudio } from "./bent-walad-audio.mjs";
 import {
   LETTERS,
@@ -177,7 +174,8 @@ import {
   sanitizeReconnectToken
 } from "./bent-walad-room.mjs";
 
-const APP_ID = "dhiamahouachi-bent-walad-v2";
+const RELAY_URL =
+  "https://bent-walad-room-relay.dhiamahouachi115.chatgpt.site";
 const ROOM_PREFIX = "bw2-";
 const MAX_PLAYERS = 8;
 const VALID_STATUSES = new Set([
@@ -983,17 +981,29 @@ function enterRoom(nextRoomCode, host) {
 
   room = joinRoom(
     {
-      appId: APP_ID,
-      relayConfig: { redundancy: 5, warnOnRelayFailure: true }
+      relayUrl: RELAY_URL,
+      role: host ? "host" : "guest"
     },
     `${ROOM_PREFIX}${roomCode}`,
     {
       onJoinError: details => {
         console.warn("Bent Walad join failure", details?.error ?? details);
+        setNetStatus("تعذر الاتصال", "error");
         if (!hostSeen && !isHost) {
-          setNetStatus("تعذر الاتصال", "error");
           qs("#guestLobby").textContent =
             "تعذر الاتصال. تأكد من الكود ومن أن صاحب الغرفة فاتح اللعبة.";
+        } else if (isHost) {
+          toast("تعذر فتح الغرفة. جرّب إنشاء غرفة جديدة.");
+        }
+      },
+      onStatusChange: nextStatus => {
+        if (!room || status === "home") return;
+        if (nextStatus === "connected") {
+          setNetStatus(isHost ? "الغرفة جاهزة" : "متصل بالغرفة");
+        } else if (nextStatus === "reconnecting") {
+          setNetStatus("جاري إعادة الاتصال…", "connecting");
+        } else if (nextStatus === "error") {
+          setNetStatus("انقطع الاتصال", "error");
         }
       }
     }
