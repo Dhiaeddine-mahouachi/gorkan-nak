@@ -404,6 +404,9 @@ function applyState(payload, senderId) {
   const nextStatus = VALID_STATUSES.has(payload.status)
     ? payload.status
     : "lobby";
+  const previousStatus = status;
+  const previousRound = currentRound;
+  const nextRound = clampInteger(payload.currentRound, 0, 30, 0);
   const nextPlayers = new Map();
   (Array.isArray(payload.players) ? payload.players : []).forEach(value => {
     const player = safePlayer(value);
@@ -438,13 +441,15 @@ function applyState(payload, senderId) {
     );
   });
 
+  const isNewRound = nextRound !== previousRound;
+  const enteringReview = previousStatus !== "review" && nextStatus === "review";
   const preservePendingStop =
-    status === "playing" && nextStatus === "playing" && roundLocked;
+    !isNewRound && status === "playing" && nextStatus === "playing" && roundLocked;
   lastStateSequence = sequence || lastStateSequence;
   hostSeen = true;
   hostId = senderId;
   status = nextStatus;
-  currentRound = clampInteger(payload.currentRound, 0, 30, 0);
+  currentRound = nextRound;
   currentLetter = LETTERS.includes(payload.currentLetter)
     ? payload.currentLetter
     : "";
@@ -460,6 +465,18 @@ function applyState(payload, senderId) {
     : "";
   roundPoints = nextRoundPoints;
   players = nextPlayers;
+  if (isNewRound) {
+    myAnswers = Array(nextCategories.length).fill("");
+    validity = {};
+    reviewSoundKeys = new Set();
+    window.clearTimeout(answerTimer);
+  } else {
+    myAnswers = sanitizeAnswers(myAnswers, nextCategories.length);
+  }
+  if (enteringReview) {
+    validity = {};
+    reviewSoundKeys = new Set();
+  }
   if (Object.keys(sourceAnswers).length) {
     allAnswers = nextAnswers;
   } else if (nextStatus === "playing" || nextStatus === "lobby") {
