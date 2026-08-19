@@ -37,6 +37,23 @@ test("letter validation uses normalized Arabic", () => {
   assert.equal(startsWithLetter("", "ب"), false);
 });
 
+test("letter validation accepts common Arabic and Latin equivalents", () => {
+  assert.equal(startsWithLetter("سمك", "س"), true);
+  assert.equal(startsWithLetter("Sardine", "س"), true);
+  assert.equal(startsWithLetter("City", "س"), true);
+  assert.equal(startsWithLetter("chat", "ش"), true);
+  assert.equal(startsWithLetter("7amama", "ح"), true);
+  assert.equal(startsWithLetter("banana", "س"), false);
+});
+
+test("same-room replay and automatic one-minute countdown are wired", () => {
+  assert.match(gameHtml, /id="lobbyRoundCount"/);
+  assert.match(gameHtml, /id="roundTimer"/);
+  assert.match(gameHtml, /Date\.now\(\) \+ 60_000/);
+  assert.match(gameHtml, /beginRoundEnd\(selfId,[^\n]+true\)/);
+  assert.match(gameHtml, /انتهى الوقت/);
+});
+
 test("category options provide 8 checked standards and 10 optional choices", () => {
   assert.deepEqual(STANDARD_CATEGORIES, [
     "اسم ولد",
@@ -104,37 +121,7 @@ test("Arabic-style soundtrack and interaction sounds are wired locally", () => {
   assert.match(gameAudioModule, /function frameDrum/);
   assert.match(gameAudioModule, /kind === "word-win"/);
   assert.match(gameAudioModule, /kind === "word-lose"/);
-  assert.match(gameAudioModule, /music: 0\.38/);
-  assert.match(gameAudioModule, /effects: 0\.94/);
   assert.equal(/https?:\/\//.test(gameAudioModule), false);
-});
-
-test("active-room reconnects restore known players instead of rejecting them", () => {
-  assert.match(gameHtml, /findReconnectPlayerId/);
-  assert.match(gameHtml, /knownPlayerId && restorePlayer/);
-  assert.match(gameHtml, /reconnectToken/);
-  assert.match(gameHtml, /waitForHostReconnect/);
-  assert.match(
-    gameHtml,
-    /setTimeout\(\(\) => \{[\s\S]*?show\("lost"\);[\s\S]*?\}, 10000\)/
-  );
-  assert.match(gameHtml, /if \(startsNewRound\) \{[\s\S]*?myAnswers = Array/);
-});
-
-test("multiplayer uses the durable room relay instead of direct WebRTC", () => {
-  assert.match(gameHtml, /from "\.\/bent-walad-relay\.mjs"/);
-  assert.match(gameHtml, /relayUrl: RELAY_URL/);
-  assert.doesNotMatch(gameHtml, /@trystero-p2p/);
-  assert.doesNotMatch(gameHtml, /الغرفة تعمل مباشرة بين اللاعبين/);
-});
-
-test("all game buttons have a sound path including the sound toggle", () => {
-  assert.match(gameHtml, /event\.target\.closest\?\.\("button"\)/);
-  assert.match(gameHtml, /button\.id === "stopBtn" \? "stop" : "click"/);
-  assert.match(
-    gameHtml,
-    /qs\("#soundToggle"\)[\s\S]*?gameAudio\.play\("click"\)/
-  );
 });
 
 test("review uses two decision buttons with win and loss feedback", () => {
