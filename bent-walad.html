@@ -13,6 +13,7 @@
 /* Original Arabic-comic artwork: geometric motifs replace platform-dependent emoji. */
 body:before{content:"";position:fixed;inset:0 0 auto;height:8px;background:repeating-linear-gradient(45deg,var(--yellow) 0 9px,var(--ink) 9px 11px,var(--purple) 11px 20px,var(--ink) 20px 22px,var(--blue) 22px 31px,var(--ink) 31px 33px);z-index:30;pointer-events:none}.svgSprite{position:absolute;width:0;height:0;overflow:hidden}.uiIcon{display:inline-block;width:1.35em;height:1.35em;flex:0 0 auto;color:currentColor;vertical-align:-.28em}.headingIcon{width:1.25em;height:1.25em;color:var(--purple);filter:drop-shadow(2px 2px 0 var(--ink))}.sectionHeading{display:flex;align-items:center;gap:10px}.sectionHeading.centered{justify-content:center}.panel:before{content:"";width:42px;height:42px;background:var(--yellow);clip-path:polygon(50% 0,61% 25%,85% 15%,75% 39%,100% 50%,75% 61%,85% 85%,61% 75%,50% 100%,39% 75%,15% 85%,25% 61%,0 50%,25% 39%,15% 15%,39% 25%);transform:rotate(-10deg);opacity:.72}.online{display:inline-flex;align-items:center;gap:7px}.online:before{content:"";width:9px;height:9px;border:2px solid var(--ink);border-radius:50%;background:#2ba94f;box-shadow:1px 1px 0 var(--ink)}.online.connecting:before{background:#e29b19}.online.error:before{background:var(--red)}.bubble{display:inline-flex;align-items:center;gap:7px}.comicWord{display:inline-grid;place-items:center;min-width:48px;min-height:34px;padding:4px 10px;background:var(--yellow);color:var(--ink);border:2px solid var(--ink);clip-path:polygon(8% 15%,29% 18%,40% 0,55% 18%,78% 8%,75% 31%,100% 45%,78% 57%,91% 81%,66% 78%,53% 100%,40% 80%,15% 92%,20% 67%,0 55%,20% 42%);font-weight:900;line-height:1;transform:rotate(-5deg)}.buttonWord{min-width:42px;min-height:30px;padding:4px 8px;font-size:13px}.iconButton{display:inline-flex;align-items:center;justify-content:center;gap:8px}.wide.iconButton{display:flex}.rule{display:grid;justify-items:center;align-content:center;gap:6px;min-height:92px}.rule .uiIcon{width:35px;height:35px;color:var(--purple)}.codeBox .uiIcon{width:30px;height:30px;color:var(--ink)}.playerChip.host:after{content:"المضيف";display:inline-block;margin-inline-start:7px;padding:2px 7px;border:2px solid var(--ink);border-radius:999px;background:var(--yellow);font-size:10px}.stop{position:relative;isolation:isolate;transform:rotate(-1deg)}.stop:before,.stop:after{content:"";position:absolute;width:15px;height:4px;background:var(--ink);border-radius:2px;top:50%;z-index:-1}.stop:before{right:-23px;box-shadow:7px -13px 0 -1px var(--ink),7px 13px 0 -1px var(--ink);transform:rotate(8deg)}.stop:after{left:-23px;box-shadow:-7px -13px 0 -1px var(--ink),-7px 13px 0 -1px var(--ink);transform:rotate(-8deg)}.resultMotif{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:12px}.resultMotif .uiIcon{width:42px;height:42px;color:var(--yellow);filter:drop-shadow(2px 2px 0 var(--ink))}.resultWord{display:inline-block;padding:7px 18px;border:3px solid var(--ink);border-radius:50%;background:var(--pink);box-shadow:3px 3px 0 var(--ink);font-size:24px;font-weight:900;transform:rotate(2deg)}.lostArch{display:inline-grid;place-items:center;width:82px;height:92px;margin-bottom:12px;border:4px solid var(--ink);border-bottom-width:7px;border-radius:42px 42px 8px 8px;background:var(--purple);box-shadow:5px 5px 0 var(--ink);color:#fff}.lostArch .uiIcon{width:42px;height:42px}.statusNote:before{content:"";display:inline-block;width:9px;height:9px;margin-inline-end:8px;background:var(--yellow);border:2px solid var(--ink);transform:rotate(45deg)}.topTools{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}.soundToggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:36px;padding:7px 10px;border-width:2px;border-radius:999px;background:var(--blue);box-shadow:2px 2px 0 var(--ink);font-size:12px}.soundToggle:hover{box-shadow:3px 3px 0 var(--ink)}.soundToggle .uiIcon{width:19px;height:19px}.soundToggle[data-state="waiting"]{background:#ffe59a}.soundToggle[data-state="off"]{background:#fff}.soundToggle[data-state="unsupported"]{background:#eee;color:var(--muted)}
 .logoMark{width:37px;height:37px;color:var(--ink);filter:drop-shadow(1px 2px 0 rgba(255,255,255,.7))}.audioGate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:18px;background:rgba(28,24,48,.78);backdrop-filter:blur(8px)}.audioGateCard{width:min(430px,100%);padding:28px 22px;text-align:center;border:4px solid var(--ink);border-radius:28px;background:var(--paper);box-shadow:10px 10px 0 var(--ink)}.audioGateIcon{display:grid;place-items:center;width:86px;height:86px;margin:0 auto 15px;border:4px solid var(--ink);border-radius:50%;background:var(--yellow);box-shadow:5px 5px 0 var(--ink)}.audioGateIcon .uiIcon{width:45px;height:45px}.audioGateCard h2{margin-bottom:8px}.audioGateCard p{margin-bottom:14px;color:var(--muted);font-weight:800}.audioGateCard button{width:100%;font-size:19px}.answerRow.acceptedWord{border-radius:12px;background:#e6fbea;animation:wordAccept .46s ease}.answerRow.rejectedWord{border-radius:12px;background:#ffe4e4;animation:wordReject .46s ease}.answerText.wordAccepted{color:#117a34}.answerText.wordRejected{color:#b91f32;text-decoration-line:line-through;text-decoration-color:var(--red);text-decoration-thickness:4px;animation:wordStrike .4s ease}.answerControls{display:grid;gap:7px;justify-items:end}.decisionButtons{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.decisionButton{min-width:82px;padding:7px 10px;border-width:2px;border-radius:10px;font-size:11px;box-shadow:1px 1px 0 var(--ink)}.decisionButton:hover{box-shadow:2px 2px 0 var(--ink)}.acceptDecision{background:#fff}.rejectDecision{background:#fff}.acceptDecision.selected{background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.22),2px 2px 0 var(--ink)}.rejectDecision.selected{background:var(--red);color:#fff;box-shadow:0 0 0 3px rgba(255,98,95,.22),2px 2px 0 var(--ink)}@keyframes wordAccept{0%{transform:scale(.96);background:#fff}55%{transform:scale(1.025);background:#a9f0bd}100%{transform:scale(1);background:#e6fbea}}@keyframes wordReject{0%,100%{transform:translateX(0)}25%{transform:translateX(7px)}50%{transform:translateX(-6px)}75%{transform:translateX(3px)}}@keyframes wordStrike{0%{text-decoration-color:transparent;opacity:.65}100%{text-decoration-color:var(--red);opacity:1}}
+.roundTimer{display:inline-block;margin-top:7px;padding:5px 12px;border:3px solid var(--ink);border-radius:999px;background:var(--green);box-shadow:2px 2px 0 var(--ink);font-size:22px;font-weight:900;direction:ltr}.roundTimer.urgent{background:var(--red);color:#fff;animation:pulse .7s infinite}.newGameSettings{margin-top:14px;padding:13px;border:2px dashed var(--ink);border-radius:15px;background:#fff2a7}.newGameSettings label{display:block;margin-bottom:7px;font-weight:900}
 @media(max-width:720px){.cards,.answers{grid-template-columns:1fr}.rules{grid-template-columns:1fr}.panel{padding:15px;border-radius:20px}.gameTop{grid-template-columns:1fr auto}.scoreMini{grid-column:1/-1;text-align:center}.scoreLine{justify-content:center}.letter{width:92px;height:92px;font-size:61px}.answerRow{grid-template-columns:95px 1fr}.answerRow>div:last-child{grid-column:1/-1}.answerControls{justify-items:stretch}.decisionButtons{justify-content:stretch}.decisionButton{flex:1}.top{align-items:flex-start}.topTools{max-width:55%;gap:6px}.online,.soundToggle{font-size:10px}.soundToggle{min-height:32px;padding:6px 8px}.resultMotif .uiIcon{width:34px;height:34px}.resultWord{font-size:21px}.stop:before,.stop:after{display:none}}
 </style>
 </head>
@@ -143,20 +144,23 @@ body:before{content:"";position:fixed;inset:0 0 auto;height:8px;background:repea
 </div>
 </div></div></section>
 
-<section id="lobby" class="screen"><div class="panel"><div class="roomHead"><div><div class="tiny">كود الغرفة</div><div class="codeBox"><span id="roomCode"></span><svg class="uiIcon" aria-hidden="true"><use href="#icon-ticket"></use></svg></div></div><div class="actions"><button class="blue iconButton" id="copyBtn"><svg class="uiIcon" aria-hidden="true"><use href="#icon-share"></use></svg>شارك رابط الدعوة</button><button class="ghost" id="leaveBtn">اخرج</button></div></div><h2 class="sectionHeading" style="margin-top:22px"><svg class="uiIcon headingIcon" aria-hidden="true"><use href="#icon-people"></use></svg>اللاعبين في الغرفة</h2><div id="lobbyPlayers" class="players"></div><div id="hostLobby" class="hidden"><button class="green wide iconButton" id="startBtn"><span class="comicWord buttonWord">يلا</span> ابدأ اللعبة</button><p class="tiny" style="text-align:center;margin-top:10px">لازم يكونوا لاعبين على الأقل.</p></div><div id="guestLobby" class="statusNote hidden" aria-live="polite">استنى صاحب الغرفة يبدأ اللعبة…</div></div></section>
+<section id="lobby" class="screen"><div class="panel"><div class="roomHead"><div><div class="tiny">كود الغرفة</div><div class="codeBox"><span id="roomCode"></span><svg class="uiIcon" aria-hidden="true"><use href="#icon-ticket"></use></svg></div></div><div class="actions"><button class="blue iconButton" id="copyBtn"><svg class="uiIcon" aria-hidden="true"><use href="#icon-share"></use></svg>شارك رابط الدعوة</button><button class="ghost" id="leaveBtn">اخرج</button></div></div><h2 class="sectionHeading" style="margin-top:22px"><svg class="uiIcon headingIcon" aria-hidden="true"><use href="#icon-people"></use></svg>اللاعبين في الغرفة</h2><div id="lobbyPlayers" class="players"></div><div id="hostLobby" class="hidden"><div class="newGameSettings"><label for="lobbyRoundCount">عدد الجولات في اللعبة الجديدة</label><select id="lobbyRoundCount"><option>3</option><option>5</option><option>7</option><option>10</option><option>15</option></select></div><button class="green wide iconButton" id="startBtn"><span class="comicWord buttonWord">يلا</span> ابدأ اللعبة</button><p class="tiny" style="text-align:center;margin-top:10px">نفس اللاعبين ونفس الغرفة — لازم يكونوا لاعبين على الأقل.</p></div><div id="guestLobby" class="statusNote hidden" aria-live="polite">استنى صاحب الغرفة يبدأ اللعبة…</div></div></section>
 
-<section id="game" class="screen"><div class="panel"><div class="gameTop"><div class="roundInfo"><b id="roundLabel"></b><div class="tiny" id="usedLetters"></div></div><div class="letterWrap"><div class="letter" id="bigLetter"></div></div><div class="scoreMini"><div class="tiny">الترتيب الحالي</div><div class="scoreLine" id="scoreLine"></div></div></div><div class="statusNote" id="gameStatus" aria-live="polite"></div><div id="answerGrid" class="answers"></div><div class="stopWrap"><button class="stop" id="stopBtn">قف!</button></div></div></section>
+<section id="game" class="screen"><div class="panel"><div class="gameTop"><div class="roundInfo"><b id="roundLabel"></b><div class="tiny" id="usedLetters"></div><div class="roundTimer" id="roundTimer" aria-live="polite">01:00</div></div><div class="letterWrap"><div class="letter" id="bigLetter"></div></div><div class="scoreMini"><div class="tiny">الترتيب الحالي</div><div class="scoreLine" id="scoreLine"></div></div></div><div class="statusNote" id="gameStatus" aria-live="polite"></div><div id="answerGrid" class="answers"></div><div class="stopWrap"><button class="stop" id="stopBtn">قف!</button></div></div></section>
 
 <section id="review" class="screen"><div class="panel"><h2 class="sectionHeading"><svg class="uiIcon headingIcon" aria-hidden="true"><use href="#icon-abacus"></use></svg>وقت الحساب</h2><p class="muted">الكلمة المكررة أو بحرف غلط تُرفض تلقائياً. صاحب الغرفة يقدر يثبت القرار بزر مقبولة أو مرفوضة.</p><div id="stoppedBy" class="statusNote"></div><div id="reviewGrid" class="reviewGrid"></div><div id="hostReview" class="hidden"><button class="green wide" id="confirmReview">ثبّت النقاط</button></div><div id="guestReview" class="statusNote hidden">صاحب الغرفة يراجع الإجابات…</div></div></section>
 
 <section id="results" class="screen"><div class="panel"><div class="resultMotif" aria-hidden="true"><svg class="uiIcon"><use href="#icon-star8"></use></svg><span class="resultWord">مبروك</span><svg class="uiIcon"><use href="#icon-star8"></use></svg></div><h2 id="resultTitle" class="sectionHeading centered">النتيجة</h2><div id="leaderboard" class="leader"></div><div id="hostResults" class="hidden"><button class="primary wide" id="nextBtn">الجولة التالية</button></div><div id="guestResults" class="statusNote hidden">استنى صاحب الغرفة…</div></div></section>
 
-<section id="lost" class="screen"><div class="panel"><div class="wait"><div class="lostArch" aria-hidden="true"><svg class="uiIcon"><use href="#icon-disconnect"></use></svg></div><h2>انقطع صاحب الغرفة</h2><p>صاحب الغرفة خرج أو انقطع عنه الإنترنت. اطلب منه يفتح اللعبة من جديد.</p><button class="primary" onclick="location.href=location.pathname">ارجع للرئيسية</button></div></div></section>
+<section id="lost" class="screen"><div class="panel"><div class="wait"><div class="lostArch" aria-hidden="true"><svg class="uiIcon"><use href="#icon-disconnect"></use></svg></div><h2>انقطع صاحب الغرفة</h2><p>الغرفة تعمل مباشرة بين اللاعبين، لذلك لازم صاحب الغرفة يبقى فاتح اللعبة.</p><button class="primary" onclick="location.href=location.pathname">ارجع للرئيسية</button></div></div></section>
 <div id="toast" class="toast"></div>
 </div>
 
 <script type="module">
-import { joinRoom, selfId } from "./bent-walad-relay.mjs";
+import {
+  joinRoom,
+  selfId
+} from "https://esm.run/@trystero-p2p/mqtt@0.25.3";
 import { createGameAudio } from "./bent-walad-audio.mjs";
 import {
   LETTERS,
@@ -168,14 +172,8 @@ import {
   sanitizeName,
   startsWithLetter
 } from "./bent-walad-core.mjs";
-import {
-  getReconnectToken,
-  rebindPlayerState,
-  sanitizeReconnectToken
-} from "./bent-walad-room.mjs";
 
-const RELAY_URL =
-  "https://bent-walad-room-relay.dhiamahouachi115.chatgpt.site";
+const APP_ID = "dhiamahouachi-bent-walad-v2";
 const ROOM_PREFIX = "bw2-";
 const MAX_PLAYERS = 8;
 const VALID_STATUSES = new Set([
@@ -245,13 +243,14 @@ let isHost = false;
 let hostId = "";
 let roomCode = "";
 let myName = "";
-let reconnectToken = "";
 let roundCount = 5;
 let categories = [];
 let players = new Map();
 let status = "home";
 let currentRound = 0;
 let currentLetter = "";
+let roundEndsAt = 0;
+let roundTimedOut = false;
 let usedLetters = [];
 let allAnswers = {};
 let myAnswers = [];
@@ -259,7 +258,6 @@ let stoppedById = "";
 let validity = {};
 let roundPoints = {};
 let actions = {};
-let reconnectTokens = new Map();
 let hostSeen = false;
 let roundLocked = false;
 let roundSubmissions = new Set();
@@ -269,7 +267,6 @@ let answerTimer = 0;
 let roundFinalizeTimer = 0;
 let guestStopTimer = 0;
 let connectTimer = 0;
-let hostDisconnectTimer = 0;
 let toastTimer = 0;
 let reviewSoundKeys = new Set();
 
@@ -365,6 +362,8 @@ function publicState(includeAnswers = false) {
     status,
     currentRound,
     currentLetter,
+    roundEndsAt,
+    roundTimedOut,
     usedLetters: [...usedLetters],
     roundCount,
     categories: [...categories],
@@ -394,59 +393,6 @@ function syncGuests() {
   sendState();
 }
 
-function sendHello(target) {
-  if (isHost || !actions.hello || !target) return;
-  actions.hello
-    .send({ name: myName, reconnectToken }, { target })
-    .catch(() => toast("تعذر إعادة الاتصال بصاحب الغرفة"));
-}
-
-function findReconnectPlayerId(token, name) {
-  if (token) {
-    for (const [playerId, savedToken] of reconnectTokens) {
-      if (savedToken === token && players.has(playerId)) return playerId;
-    }
-  }
-
-  const offlineMatches = playerList().filter(
-    player =>
-      player.id !== hostId &&
-      player.online === false &&
-      player.name === name
-  );
-  return offlineMatches.length === 1 ? offlineMatches[0].id : "";
-}
-
-function restorePlayer(previousId, peerId, token) {
-  const restored = rebindPlayerState({
-    players,
-    previousId,
-    nextId: peerId,
-    allAnswers,
-    roundPoints,
-    validity,
-    roundSubmissions,
-    stoppedById
-  });
-  if (!restored.moved) return false;
-
-  stoppedById = restored.stoppedById;
-  const savedToken = token || reconnectTokens.get(previousId) || "";
-  reconnectTokens.delete(previousId);
-  if (savedToken) reconnectTokens.set(peerId, savedToken);
-  return true;
-}
-
-function waitForHostReconnect() {
-  window.clearTimeout(hostDisconnectTimer);
-  setNetStatus("جاري إعادة الاتصال…", "connecting");
-  hostDisconnectTimer = window.setTimeout(() => {
-    if (isHost || !room || status === "home") return;
-    setNetStatus("انقطع الاتصال", "error");
-    show("lost");
-  }, 10000);
-}
-
 function applyState(payload, senderId) {
   if (isHost || !payload || String(payload.hostId ?? "") !== senderId) return;
   if (hostId && senderId !== hostId) return;
@@ -458,10 +404,6 @@ function applyState(payload, senderId) {
   const nextStatus = VALID_STATUSES.has(payload.status)
     ? payload.status
     : "lobby";
-  const nextRound = clampInteger(payload.currentRound, 0, 30, 0);
-  const startsNewRound =
-    nextStatus === "playing" &&
-    (status !== "playing" || currentRound !== nextRound);
   const nextPlayers = new Map();
   (Array.isArray(payload.players) ? payload.players : []).forEach(value => {
     const player = safePlayer(value);
@@ -502,19 +444,17 @@ function applyState(payload, senderId) {
   hostSeen = true;
   hostId = senderId;
   status = nextStatus;
-  currentRound = nextRound;
+  currentRound = clampInteger(payload.currentRound, 0, 30, 0);
   currentLetter = LETTERS.includes(payload.currentLetter)
     ? payload.currentLetter
     : "";
+  roundEndsAt = clampInteger(payload.roundEndsAt, 0, Number.MAX_SAFE_INTEGER, 0);
+  roundTimedOut = payload.roundTimedOut === true;
   usedLetters = Array.isArray(payload.usedLetters)
     ? payload.usedLetters.filter(letter => LETTERS.includes(letter)).slice(0, 30)
     : [];
   roundCount = clampInteger(payload.roundCount, 1, 30, 5);
   categories = nextCategories;
-  if (startsNewRound) {
-    myAnswers = Array(nextCategories.length).fill("");
-    reviewSoundKeys = new Set();
-  }
   stoppedById = nextPlayers.has(payload.stoppedById)
     ? payload.stoppedById
     : "";
@@ -528,7 +468,6 @@ function applyState(payload, senderId) {
   if (!preservePendingStop) roundLocked = false;
   window.clearTimeout(connectTimer);
   window.clearTimeout(guestStopTimer);
-  window.clearTimeout(hostDisconnectTimer);
   setNetStatus("متصل بالغرفة");
   render();
 }
@@ -568,6 +507,7 @@ function render() {
     renderPlayers("#lobbyPlayers");
     qs("#hostLobby").classList.toggle("hidden", !isHost);
     qs("#guestLobby").classList.toggle("hidden", isHost);
+    if (isHost) qs("#lobbyRoundCount").value = String(roundCount);
     qs("#startBtn").disabled = activePlayerIds().length < 2;
     if (!isHost) {
       qs("#guestLobby").textContent = hostSeen
@@ -594,7 +534,9 @@ function render() {
   if (status === "review") {
     show("review");
     const stopper = players.get(stoppedById);
-    qs("#stoppedBy").textContent = `${stopper?.name || "لاعب"} قال قف!`;
+    qs("#stoppedBy").textContent = roundTimedOut
+      ? "انتهى الوقت — تم إيقاف الجولة تلقائياً"
+      : `${stopper?.name || "لاعب"} قال قف!`;
     qs("#hostReview").classList.toggle("hidden", !isHost);
     qs("#guestReview").classList.toggle("hidden", isHost);
     renderReview();
@@ -667,6 +609,21 @@ function renderRoundControls() {
   } else {
     note.textContent = `كل إجابة لازم تبدأ بحرف ${currentLetter}. كمّلت؟ اضغط قف قبل صحابك!`;
     stopButton.textContent = "قف!";
+  }
+}
+
+function updateCountdown() {
+  const timer = qs("#roundTimer");
+  if (!timer) return;
+  const remaining = status === "playing"
+    ? Math.max(0, Math.ceil((roundEndsAt - Date.now()) / 1000))
+    : 0;
+  const minutes = String(Math.floor(remaining / 60)).padStart(2, "0");
+  const seconds = String(remaining % 60).padStart(2, "0");
+  timer.textContent = `${minutes}:${seconds}`;
+  timer.classList.toggle("urgent", remaining <= 10);
+  if (isHost && status === "playing" && remaining === 0 && !roundLocked) {
+    beginRoundEnd(selfId, sanitizeAnswers(myAnswers, categories.length), true);
   }
 }
 
@@ -842,8 +799,9 @@ function setupRoom() {
     if (isHost) {
       window.setTimeout(() => sendState(peerId), 140);
     } else {
-      if (peerId === hostId) window.clearTimeout(hostDisconnectTimer);
-      sendHello(peerId);
+      actions.hello
+        .send({ name: myName }, { target: peerId })
+        .catch(() => toast("تعذر إرسال اسم اللاعب"));
     }
   };
 
@@ -853,7 +811,6 @@ function setupRoom() {
       if (!player) return;
       if (status === "lobby") {
         players.delete(peerId);
-        reconnectTokens.delete(peerId);
       } else {
         players.set(peerId, { ...player, online: false });
       }
@@ -863,27 +820,16 @@ function setupRoom() {
     }
 
     if (peerId === hostId) {
-      waitForHostReconnect();
+      setNetStatus("انقطع الاتصال", "error");
+      show("lost");
     }
   };
 
   actions.hello.onMessage = (data, { peerId }) => {
     if (!isHost) return;
-    const name = sanitizeName(data?.name) || "لاعب";
-    const token = sanitizeReconnectToken(data?.reconnectToken);
-    const knownPlayerId = players.has(peerId)
-      ? peerId
-      : findReconnectPlayerId(token, name);
-
     if (status !== "lobby") {
-      if (knownPlayerId && restorePlayer(knownPlayerId, peerId, token)) {
-        render();
-        syncGuests();
-        toast(`${name} رجع للغرفة`);
-        return;
-      }
       actions.reject.send(
-        { hostId, message: "اللعبة بدأت بالفعل. استعمل نفس الاسم والجهاز للرجوع." },
+        { hostId, message: "اللعبة بدأت بالفعل" },
         { target: peerId }
       );
       return;
@@ -897,13 +843,13 @@ function setupRoom() {
       return;
     }
 
+    const name = sanitizeName(data?.name);
     players.set(peerId, {
       id: peerId,
-      name,
+      name: name || "لاعب",
       score: players.get(peerId)?.score || 0,
       online: true
     });
-    if (token) reconnectTokens.set(peerId, token);
     render();
     syncGuests();
   };
@@ -974,36 +920,23 @@ function setupRoom() {
 function enterRoom(nextRoomCode, host) {
   roomCode = nextRoomCode;
   isHost = host;
-  reconnectToken = host ? "" : getReconnectToken(roomCode, myName);
   hostSeen = host;
   status = "lobby";
   setNetStatus("جاري الاتصال…", "connecting");
 
   room = joinRoom(
     {
-      relayUrl: RELAY_URL,
-      role: host ? "host" : "guest"
+      appId: APP_ID,
+      relayConfig: { redundancy: 5, warnOnRelayFailure: true }
     },
     `${ROOM_PREFIX}${roomCode}`,
     {
       onJoinError: details => {
         console.warn("Bent Walad join failure", details?.error ?? details);
-        setNetStatus("تعذر الاتصال", "error");
         if (!hostSeen && !isHost) {
+          setNetStatus("تعذر الاتصال", "error");
           qs("#guestLobby").textContent =
             "تعذر الاتصال. تأكد من الكود ومن أن صاحب الغرفة فاتح اللعبة.";
-        } else if (isHost) {
-          toast("تعذر فتح الغرفة. جرّب إنشاء غرفة جديدة.");
-        }
-      },
-      onStatusChange: nextStatus => {
-        if (!room || status === "home") return;
-        if (nextStatus === "connected") {
-          setNetStatus(isHost ? "الغرفة جاهزة" : "متصل بالغرفة");
-        } else if (nextStatus === "reconnecting") {
-          setNetStatus("جاري إعادة الاتصال…", "connecting");
-        } else if (nextStatus === "error") {
-          setNetStatus("انقطع الاتصال", "error");
         }
       }
     }
@@ -1033,10 +966,11 @@ function enterRoom(nextRoomCode, host) {
   }
 }
 
-function beginRoundEnd(stopperId, answers) {
+function beginRoundEnd(stopperId, answers, timedOut = false) {
   if (!isHost || status !== "playing" || roundLocked) return;
   roundLocked = true;
   stoppedById = stopperId;
+  roundTimedOut = timedOut;
   window.clearTimeout(answerTimer);
   allAnswers[stopperId] = sanitizeAnswers(answers, categories.length);
   allAnswers[selfId] = sanitizeAnswers(myAnswers, categories.length);
@@ -1107,6 +1041,8 @@ function finalizeRoundEnd() {
 function startRound(number) {
   currentRound = number;
   currentLetter = pickLetter();
+  roundEndsAt = Date.now() + 60_000;
+  roundTimedOut = false;
   usedLetters.push(currentLetter);
   status = "playing";
   allAnswers = {};
@@ -1118,6 +1054,7 @@ function startRound(number) {
   roundLocked = false;
   roundSubmissions = new Set();
   render();
+  updateCountdown();
   syncGuests();
 }
 
@@ -1129,6 +1066,8 @@ function resetGameToLobby() {
   status = "lobby";
   currentRound = 0;
   currentLetter = "";
+  roundEndsAt = 0;
+  roundTimedOut = false;
   usedLetters = [];
   allAnswers = {};
   myAnswers = [];
@@ -1147,7 +1086,6 @@ function clearGameTimers() {
     roundFinalizeTimer,
     guestStopTimer,
     connectTimer,
-    hostDisconnectTimer,
     toastTimer
   ].forEach(timer => window.clearTimeout(timer));
 }
@@ -1160,14 +1098,14 @@ function leaveRoom({ keepError = false } = {}) {
   room = null;
   actions = {};
   players = new Map();
-  reconnectTokens = new Map();
   hostId = "";
   roomCode = "";
-  reconnectToken = "";
   status = "home";
   isHost = false;
   hostSeen = false;
   roundLocked = false;
+  roundEndsAt = 0;
+  roundTimedOut = false;
   roundSubmissions = new Set();
   validity = {};
   reviewSoundKeys = new Set();
@@ -1183,13 +1121,10 @@ qs("#soundToggle").addEventListener("click", async () => {
   const audioState = gameAudio.getState();
   if (!audioState.supported) return;
   if (audioState.running) {
-    gameAudio.play("click");
-    await new Promise(resolve => window.setTimeout(resolve, 90));
     await gameAudio.setEnabled(false);
     return;
   }
   await gameAudio.setEnabled(true);
-  gameAudio.play("click");
 });
 
 qs("#audioGateBtn").addEventListener("click", async () => {
@@ -1302,6 +1237,7 @@ qs("#leaveBtn").addEventListener("click", () => leaveRoom());
 
 qs("#startBtn").addEventListener("click", () => {
   if (!isHost || activePlayerIds().length < 2) return;
+  roundCount = clampInteger(qs("#lobbyRoundCount").value, 1, 30, 5);
   usedLetters = [];
   startRound(1);
 });
@@ -1383,21 +1319,18 @@ window.addEventListener("offline", () => {
 window.addEventListener("online", () => {
   setNetStatus(room ? "جاري إعادة الاتصال…" : "جاهز للعب أونلاين", room ? "connecting" : "");
 });
-window.addEventListener("pagehide", event => {
-  if (!event.persisted) {
-    try {
-      room?.leave();
-    } catch {}
-  }
+window.addEventListener("pagehide", () => {
+  try {
+    room?.leave();
+  } catch {}
   gameAudio.setPageVisible(false);
-});
-window.addEventListener("pageshow", event => {
-  gameAudio.setPageVisible(true);
-  if (event.persisted && room && !isHost && hostId) sendHello(hostId);
 });
 document.addEventListener("visibilitychange", () => {
   gameAudio.setPageVisible(!document.hidden);
+  if (!document.hidden) updateCountdown();
 });
+
+window.setInterval(updateCountdown, 250);
 
 const invite = new URLSearchParams(location.search).get("room");
 if (invite && /^\d{6}$/.test(invite)) qs("#joinCode").value = invite;
