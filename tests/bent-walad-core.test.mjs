@@ -43,7 +43,17 @@ test("letter validation accepts common Arabic and Latin equivalents", () => {
   assert.equal(startsWithLetter("City", "س"), true);
   assert.equal(startsWithLetter("chat", "ش"), true);
   assert.equal(startsWithLetter("7amama", "ح"), true);
+  assert.equal(startsWithLetter("hotel", "ح"), true);
+  assert.equal(startsWithLetter("hotel", "ه"), true);
+  assert.equal(startsWithLetter("this", "ذ"), true);
   assert.equal(startsWithLetter("banana", "س"), false);
+});
+
+test("guest answers and review decisions reset for every new round", () => {
+  assert.match(gameHtml, /const isNewRound = nextRound !== previousRound/);
+  assert.match(gameHtml, /myAnswers = Array\(nextCategories\.length\)\.fill\(""\)/);
+  assert.match(gameHtml, /if \(enteringReview\) \{[\s\S]*?validity = \{\}/);
+  assert.match(gameHtml, /!isNewRound && status === "playing"/);
 });
 
 test("same-room replay and automatic one-minute countdown are wired", () => {
