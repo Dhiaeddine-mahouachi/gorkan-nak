@@ -34,6 +34,16 @@ const DIACRITICS = /[\u064B-\u065F\u0670\u06D6-\u06ED]/g;
 const CONTROL_CHARS = /[\u0000-\u001F\u007F]/g;
 const CATEGORY_SET = new Set(CATEGORY_OPTIONS);
 
+const LETTER_ALIASES = Object.freeze({
+  ا: ["a", "e"], ب: ["b"], ت: ["t"], ث: ["th"], ج: ["j", "g"],
+  ح: ["h", "7"], خ: ["kh", "5", "x"], د: ["d"], ذ: ["dh"], ر: ["r"],
+  ز: ["z"], س: ["s", "c"], ش: ["sh", "ch"], ص: ["s", "9"],
+  ض: ["d", "dh", "9d"], ط: ["t", "6"], ظ: ["z", "dh", "6z"],
+  ع: ["a", "3"], غ: ["gh", "8"], ف: ["f"], ق: ["q", "k", "9"],
+  ك: ["k", "c"], ل: ["l"], م: ["m"], ن: ["n"], ه: ["h"],
+  و: ["w", "o", "u"], ي: ["y", "i", "e"]
+});
+
 export function normalizeArabic(value) {
   return String(value ?? "")
     .trim()
@@ -47,7 +57,12 @@ export function normalizeArabic(value) {
 
 export function startsWithLetter(value, letter) {
   const normalized = normalizeArabic(value);
-  return Boolean(normalized) && normalized.startsWith(normalizeArabic(letter));
+  const normalizedLetter = normalizeArabic(letter);
+  if (!normalized || !normalizedLetter) return false;
+  if (normalized.startsWith(normalizedLetter)) return true;
+  return (LETTER_ALIASES[normalizedLetter] || []).some(alias =>
+    normalized.startsWith(alias)
+  );
 }
 
 export function sanitizeName(value) {
